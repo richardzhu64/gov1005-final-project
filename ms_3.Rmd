@@ -1,0 +1,86 @@
+---
+title: "ms_3.Rmd"
+author: "Richard Zhu"
+date: "2/27/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r Loading in Data, include = FALSE}
+library(tidyverse)
+library(rvest)
+library(janitor)
+# Read in csv files from Kaggle - Oscar winners by demographics and information about the Oscar Winners
+demographics <- read_csv("raw-data/Oscars-demographics-DFE.csv") %>%
+  clean_names()
+oscars_overall <- read_csv("raw-data/the_oscar_award.csv") %>%
+  clean_names() %>%
+  select(year_ceremony, category, name, film, winner) %>%
+  setNames(c(year, category, name, film, winner))
+
+```
+
+
+```{r Cannes Data, include = FALSE}
+# Use rvest package to scrape data from Wikipedia from Cannes Film Festival
+# Cannes Data - Palme D'Or
+cannes_html <- read_html("https://en.wikipedia.org/wiki/Palme_d%27Or") %>%
+  html_nodes("table")
+palme_dor <- cannes_html[[2]] %>%
+  html_table(fill=TRUE) %>%
+  clean_names()
+```
+
+
+```{r BAFTA Data, include = FALSE}
+# BAFTA Data - Best International Feature Film
+bafta_tables <- read_html("https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film_Not_in_the_English_Language") %>%
+  html_nodes("table")
+
+bafta_1980s <- bafta_tables[[2]] %>% html_table()
+bafta_1990s <- bafta_tables[[3]] %>% html_table()
+bafta_2000s <- bafta_tables[[4]] %>% html_table()
+bafta_2010s <- bafta_tables[[5]] %>% html_table(fill=TRUE)
+colnames(bafta_2010s) <- c("Film", "Director(s)", "Producer(s)", "Country", "trash1", "trash2")
+bafta_2010s <- bafta_2010s %>%
+  select(1:4)
+
+  
+# compiled bafta data
+bafta <- do.call("rbind", list(bafta_1980s, bafta_1990s, 
+                             bafta_2000s, bafta_2010s))
+colnames(bafta) <- c("film", "director", "producer", "country")
+```
+
+
+```{r Oscars Data, include = FALSE}
+# Oscars BIFF
+# Overall statistics for BIFF countries, submissions, nominations
+oscars_biff_overall <- read_html("https://en.wikipedia.org/wiki/List_of_countries_by_number_of_Academy_Awards_for_Best_International_Feature_Film") %>%
+  html_nodes("table")
+
+# Function to take out &&& and + from the biff_countries entries
+replace_and <- function(s) {
+  as.numeric(str_replace_all(s, "[^[:alnum:]]", ""))
+}
+
+biff_countries <- oscars_biff_overall[[1]] %>% 
+  html_table() %>%
+  setNames(c("country", "winners", "nominations", "submissions")) %>%
+  mutate(winners = replace_and(winners),
+         nominations = replace_and(nominations),
+         submissions = replace_and(submissions))
+
+biff_year <- oscars_biff_overall[[2]] %>% html_table() %>%
+  setNames(c("year", "ceremony", "submissions", "first_time")) %>%
+  select(year, submissions, first_time)
+
+```
+
+
+
+## About
+Hello! This is my GOV 1005 final project.
