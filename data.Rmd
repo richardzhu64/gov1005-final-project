@@ -1,0 +1,137 @@
+---
+title: "data.Rmd"
+author: "Richard Zhu"
+date: "3/6/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+```{r Loading in Data, include = FALSE}
+library(tidyverse)
+library(rvest)
+library(janitor)
+# Read in csv files from Kaggle - Oscar winners by demographics and information about the Oscar Winners
+demographics <- read_csv("raw-data/Oscars-demographics-DFE.csv") %>%
+  clean_names()
+oscars_overall <- read_csv("raw-data/the_oscar_award.csv") %>%
+  clean_names() %>%
+  select(year_ceremony, category, name, film, winner) %>%
+  setNames(c("year", "category", "name", "film", "winner"))
+
+# Cannes and BAFTA information
+cannes_html <- read_html("https://en.wikipedia.org/wiki/Palme_d%27Or") %>%
+  html_nodes("table")
+bafta_tables <- read_html("https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film_Not_in_the_English_Language") %>%
+  html_nodes("table")
+
+# Oscars info
+oscars_biff_overall <- read_html("https://en.wikipedia.org/wiki/List_of_countries_by_number_of_Academy_Awards_for_Best_International_Feature_Film") %>%
+  html_nodes("table")
+
+# IMDb stuff
+imdb_titles <- read_tsv("raw-data/title.basics.tsv")
+imdb_ratings <- read_tsv("raw-data/title.ratings.tsv")
+imdb_crew <- read_tsv("raw-data/title.crew.tsv")
+```
+
+
+```{r Cannes Data, include = FALSE}
+# Use rvest package to scrape data from Wikipedia from Cannes Film Festival
+# Cannes Data - Palme D'Or
+
+palme_dor <- cannes_html[[2]] %>%
+  html_table(fill=TRUE) %>%
+  clean_names() %>%
+  mutate(film = str_replace_all(film, "[^[:alnum:]]", ""))
+```
+
+
+```{r BAFTA Data, include = FALSE}
+# BAFTA Data - Best International Feature Film
+
+bafta_1980s <- bafta_tables[[2]] %>% html_table()
+bafta_1990s <- bafta_tables[[3]] %>% html_table()
+bafta_2000s <- bafta_tables[[4]] %>% html_table()
+bafta_2010s <- bafta_tables[[5]] %>% html_table(fill=TRUE)
+bafta_2020s <- bafta_tables[[6]] %>% html_table(fill = TRUE)
+colnames(bafta_2010s) <- c("Film", "Director(s)", "Producer(s)", "Country", "trash1", "trash2")
+bafta_2010s <- bafta_2010s %>%
+  select(1:4)
+colnames(bafta_2020s) <- c("Film", "Director(s)", "Producer(s)", "Country", "trash1")
+bafta_2020s <- bafta_2020s %>%
+  select(1:4)
+
+  
+# compiled bafta data
+bafta <- do.call("rbind", list(bafta_1980s, bafta_1990s, 
+                             bafta_2000s, bafta_2010s, bafta_2020s))
+colnames(bafta) <- c("film", "director", "producer", "country")
+```
+
+
+```{r Oscars Data, include = FALSE}
+# Oscars BIFF
+# Overall statistics for BIFF countries, submissions, nominations
+
+# Function to take out &&& and + from the biff_countries entries
+replace_and <- function(s) {
+  as.numeric(str_replace_all(s, "[^[:alnum:]]", ""))
+}
+
+biff_countries <- oscars_biff_overall[[1]] %>% 
+  html_table() %>%
+  setNames(c("country", "winners", "nominations", "submissions")) %>%
+  mutate(winners = replace_and(winners),
+         nominations = replace_and(nominations),
+         submissions = replace_and(submissions))
+
+biff_year <- oscars_biff_overall[[2]] %>% html_table() %>%
+  setNames(c("year", "ceremony", "submissions", "first_time")) %>%
+  select(year, submissions, first_time)
+
+# IMDB Title Basics - how to get years, ratings, number of votes
+
+clean_imdb_titles <- imdb_titles %>%
+  filter(titleType == "movie") %>%
+  select(tconst, primaryTitle, originalTitle, startYear, runtimeMinutes) %>%
+  rename(year = startYear) %>%
+  clean_names()
+
+clean_imdb_ratings <- imdb_ratings %>%
+  clean_names()
+
+clean_imdb <- clean_imdb_titles %>%
+  left_join(clean_imdb_ratings, by="tconst")
+```
+
+```{r add years to data}
+## helper function for years
+assign_year <- function(row, mod, init) {
+  init + floor(row/mod)
+}
+
+bafta_year <- function(row) {
+  ifelse(row < 72, assign_year(row, 4, 1983), ifelse(row < 87, assign_year(row - 72, 5, 2001), ifelse(row < 93, assign_year(row - 87, 6, 2004), assign_year(row - 93, 5, 2005))))
+}
+
+palme_dor <- palme_dor %>%
+  mutate(year = as.numeric(year)) %>%
+  filter(!is.na(year))
+bafta_no_year <- bafta %>%
+  mutate(first_2 = substr(director, 1,2)) %>%
+  filter(!(first_2 == "19" | first_2 == "20")) %>%
+  mutate(row_num = seq.int(nrow(bafta_no_year)) - 1) %>%
+  mutate(year = bafta_year(row_num)) # %>%
+  # select(-first_2, -row_num)
+
+
+  #ifelse(row_num < 72, assign_year(row_num, 4, 1983), # assign_year(row_num - 72, 5, 2001))
+
+  
+```
