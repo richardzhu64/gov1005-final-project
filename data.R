@@ -1,18 +1,4 @@
----
-title: "data.Rmd"
-author: "Richard Zhu"
-date: "3/6/2020"
-output: html_document
----
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
-```{r Loading in Data, include = FALSE}
 library(tidyverse)
 library(rvest)
 library(janitor)
@@ -38,10 +24,8 @@ oscars_biff_overall <- read_html("https://en.wikipedia.org/wiki/List_of_countrie
 imdb_titles <- read_tsv("raw-data/title.basics.tsv")
 imdb_ratings <- read_tsv("raw-data/title.ratings.tsv")
 imdb_crew <- read_tsv("raw-data/title.crew.tsv")
-```
 
 
-```{r Cannes Data, include = FALSE}
 # Use rvest package to scrape data from Wikipedia from Cannes Film Festival
 # Cannes Data - Palme D'Or
 
@@ -49,10 +33,8 @@ palme_dor <- cannes_html[[2]] %>%
   html_table(fill=TRUE) %>%
   clean_names() %>%
   mutate(film = str_replace_all(film, "[^[:alnum:]]", ""))
-```
 
 
-```{r BAFTA Data, include = FALSE}
 # BAFTA Data - Best International Feature Film
 
 bafta_1980s <- bafta_tables[[2]] %>% html_table()
@@ -67,15 +49,13 @@ colnames(bafta_2020s) <- c("Film", "Director(s)", "Producer(s)", "Country", "tra
 bafta_2020s <- bafta_2020s %>%
   select(1:4)
 
-  
+
 # compiled bafta data
 bafta <- do.call("rbind", list(bafta_1980s, bafta_1990s, 
-                             bafta_2000s, bafta_2010s, bafta_2020s))
+                               bafta_2000s, bafta_2010s, bafta_2020s))
 colnames(bafta) <- c("film", "director", "producer", "country")
-```
 
 
-```{r Oscars Data, include = FALSE}
 # Oscars BIFF
 # Overall statistics for BIFF countries, submissions, nominations
 
@@ -108,9 +88,7 @@ clean_imdb_ratings <- imdb_ratings %>%
 
 clean_imdb <- clean_imdb_titles %>%
   left_join(clean_imdb_ratings, by="tconst")
-```
 
-```{r add years to data}
 
 # list of countries with spaces
 long_countries <- c("South Korea", "West Germany", "Saudi Arabia", "Hong Kong")
@@ -157,14 +135,23 @@ bafta_year_win <- bafta %>%
 # helper function to split strings with spaces 
 space_string <- function(s) {
   gsub("([a-z])([A-Z])", "\\1 \\2", s)
-
+  
 }
 palme_dor_year_win <- palme_dor %>%
   mutate(country = strsplit(country, " ")) %>%
   mutate(film = space_string(film))
 
 
-# BIFF DATA CLEANING - 
+# BIFF DATA CLEANING - taking away the brackets, separating the new countries
+# list into a list of Countries
 
-  
-```
+remove_brackets <- function(s) {
+  l = length(s)
+  ifelse(grepl("\\[", s), substr(s, 1, l-2), s)
+  }
+
+biff_countries_clean <- biff_countries %>%
+  mutate(country = str_replace(country, "\\[\\w\\]", ""))
+
+biff_year_clean <- biff_year %>%
+  mutate(first_time = strsplit(first_time, ", "))

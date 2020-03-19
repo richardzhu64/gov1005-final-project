@@ -1,0 +1,46 @@
+---
+title: "ms_5.Rmd"
+author: "Richard Zhu"
+date: "3/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+source("data.R")
+```
+```{r Libraries, include=FALSE}
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(rgeos)
+library(janitor)
+```
+
+
+```{r Map Plot}
+# I created a map plot displaying each country's number of submissions to the
+# Oscars' Best International Film Category. I used the rnaturalearth package to
+# get the countries in an sf dataframe, then left_joined it to my biff_countries
+# data. From there, I used ggplot to create a geom_sf() according to the
+# countries data, with the submissions as the fill variable. In the future, I
+# hope to create a Shiny app that gives the options to users about whether they
+# want to see the submissions, winners, or nominations as the fill variable.
+
+countries <- ne_countries(returnclass = "sf") %>%
+  clean_names()
+  
+biff_countries_world <- countries %>%
+  left_join(biff_countries_clean, by=c("name" = "country"))
+
+ggplot(biff_countries_world) + 
+  geom_sf(aes(fill = submissions)) +
+  scale_fill_viridis_c(option = "plasma",
+                       direction = -1) +
+  labs(title = "Oscars Best International Film Submissions by Country",
+       caption = "Source: Wikipedia/Academy of Motion Picture Arts and Sciences",
+       fill = "Submissions") +
+  theme_void()
+```
+
