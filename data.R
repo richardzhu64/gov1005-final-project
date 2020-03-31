@@ -2,6 +2,7 @@
 library(tidyverse)
 library(rvest)
 library(janitor)
+library(htmltab)
 # Read in csv files from Kaggle - Oscar winners by demographics and information about the Oscar Winners
 demographics <- read_csv("raw-data/Oscars-demographics-DFE.csv") %>%
   clean_names()
@@ -9,6 +10,10 @@ oscars_overall <- read_csv("raw-data/the_oscar_award.csv") %>%
   clean_names() %>%
   select(year_ceremony, category, name, film, winner) %>%
   setNames(c("year", "category", "name", "film", "winner"))
+
+# cleaned IMDB data - code in imdb.R
+imdb_titles_ratings <- read_csv("raw-data/imdb_titles_ratings.csv") %>%
+  clean_names()
 
 # Cannes and BAFTA information
 cannes_html <- read_html("https://en.wikipedia.org/wiki/Palme_d%27Or") %>%
@@ -20,10 +25,6 @@ bafta_tables <- read_html("https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Fi
 oscars_biff_overall <- read_html("https://en.wikipedia.org/wiki/List_of_countries_by_number_of_Academy_Awards_for_Best_International_Feature_Film") %>%
   html_nodes("table")
 
-# IMDb stuff
-imdb_titles <- read_tsv("raw-data/title.basics.tsv")
-imdb_ratings <- read_tsv("raw-data/title.ratings.tsv")
-imdb_crew <- read_tsv("raw-data/title.crew.tsv")
 
 
 # Use rvest package to scrape data from Wikipedia from Cannes Film Festival
@@ -75,6 +76,31 @@ biff_year <- oscars_biff_overall[[2]] %>% html_table() %>%
   setNames(c("year", "ceremony", "submissions", "first_time")) %>%
   select(year, submissions, first_time)
 
+# Read in actual BIFF nominees and winners
+
+biff_url <- "https://en.wikipedia.org/wiki/List_of_Academy_Award_winners_and_nominees_for_Best_International_Feature_Film"
+biff_tables <- biff_url %>% read_html() %>% html_nodes("table")
+
+
+biff_1960s <- biff_tables[[4]] %>% html_table(fill = TRUE)
+biff_1970s <- biff_tables[[5]] %>% html_table(fill = TRUE)
+biff_1980s <- biff_tables[[6]] %>% html_table(fill = TRUE)
+biff_1990s <- biff_tables[[7]] %>% html_table(fill = TRUE)
+biff_2000s <- biff_tables[[8]] %>% html_table(fill = TRUE)
+biff_2010s <- biff_url %>%
+  htmltab(9, rm_nodata_cols = F) %>%
+  replace_na(list(Notes = "", "Term-limited?" = "")) %>%
+  `rownames<-` (seq_len(nrow(.)))
+  
+biff_titles <- do.call("rbind", list(biff_1960s, biff_1970s, biff_1980s,
+                                     biff_1990s, biff_2000s, biff_2010s))
+colnames(biff_titles) <- c("year", "film", "original_title", "director", 
+                           "country","language")
+# add winner column
+biff_titles <- biff_titles %>%
+  mutate(row_num = 1:nrow(biff_titles)) %>%
+  mutate(win = (row_num %% 5 == 1)) %>%
+  select(-row_num)
 # IMDB Title Basics - how to get years, ratings, number of votes
 
 clean_imdb_titles <- imdb_titles %>%
@@ -120,7 +146,8 @@ palme_dor <- palme_dor %>%
   mutate(year = as.numeric(year)) %>%
   filter(!is.na(year))
 
-# Here, I clean the bafta data to add year, winners, and split the country string into a list of countries.
+# Here, I clean the bafta data to add year, winners, and split the country
+# string into a list of countries.
 
 bafta_year_win <- bafta %>%
   mutate(first_2 = substr(director, 1,2)) %>%
@@ -155,3 +182,4 @@ biff_countries_clean <- biff_countries %>%
 
 biff_year_clean <- biff_year %>%
   mutate(first_time = strsplit(first_time, ", "))
+

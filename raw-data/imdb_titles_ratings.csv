@@ -1,0 +1,711 @@
+tconst,primary_title,original_title,start_year,runtime_minutes,averageRating,numVotes
+tt0002089,Carmen,Carmen,1912,\N,NA,NA
+tt0002739,Carmen,Carmen,1914,\N,NA,NA
+tt0004688,The Thief,The Thief,1914,\N,NA,NA
+tt0005060,Carmen,Carmen,1915,59,6.4,874
+tt0005061,Carmen,Carmen,1915,\N,4.8,16
+tt0006241,War and Peace,Voyna i mir,1915,\N,7.2,15
+tt0006997,The Warrior,Maciste alpino,1916,95,6.2,50
+tt0008305,Les Misérables,Les Misérables,1917,100,5.7,19
+tt0008950,Carmen,Carmen,1918,70,6,259
+tt0009382,Missing,Missing,1918,50,NA,NA
+tt0009429,No Man's Land,No Man's Land,1918,\N,NA,NA
+tt0011044,Carmen,Carmen,1921,\N,NA,NA
+tt0012092,Danton,Danton,1921,60,6.6,32
+tt0012173,First Love,First Love,1921,\N,NA,NA
+tt0012377,The Last Chance,The Last Chance,1921,50,NA,NA
+tt0012538,Outside the Law,Outside the Law,1920,75,6.6,454
+tt0013023,Confidence,Confidence,1922,\N,NA,NA
+tt0015421,Torment,Torment,1924,60,NA,NA
+tt0016112,Les Misérables,Les misérables,1925,359,6.9,51
+tt0016248,The Promised Land,The Promised Land,1925,\N,NA,NA
+tt0016709,Carmen,Carmen,1926,110,6.9,80
+tt0018198,The Nest,The Nest,1927,80,NA,NA
+tt0018512,Turkish Delight,Turkish Delight,1927,60,6,9
+tt0019509,Underground,Underground,1928,84,7.3,400
+tt0020454,Stolen Kisses,Stolen Kisses,1929,70,NA,NA
+tt0021224,Outside the Law,Outside the Law,1930,79,6.2,95
+tt0021784,Danton,Danton,1931,92,6.9,27
+tt0022747,Carmen,Carmen,1932,\N,6,7
+tt0023359,Life Is Beautiful,Prostoy sluchay,1930,96,7.3,64
+tt0025509,Les Misérables,Les misérables,1934,281,8.2,1453
+tt0026274,Devdas,Devdas,1936,139,6.3,77
+tt0026674,Man of Iron,Man of Iron,1935,61,5.7,94
+tt0026725,Les Misérables,Les Misérables,1935,108,7.6,3186
+tt0028343,Tango,Tango,1936,66,5.7,32
+tt0031311,First Love,First Love,1939,84,6.9,571
+tt0031974,The Star Maker,The Star Maker,1939,94,5.9,56
+tt0032237,The Child,Barnet,1940,85,NA,NA
+tt0074972,Black and White in Color,La victoire en chantant,1976,90,6.9,1330
+tt0075040,Seven Beauties,Pasqualino Settebellezze,1975,116,7.8,4687
+tt0075314,Taxi Driver,Taxi Driver,1976,114,8.3,676457
+tt0075367,Underground,Underground,1976,87,6.9,126
+tt0075824,That Obscure Object of Desire,Cet obscur objet du désir,1977,103,7.9,19119
+tt0075838,The Child,The Child,1977,82,4.8,864
+tt0075975,A Simple Story,Une histoire simple,1978,107,6.9,1018
+tt0076033,First Love,First Love,1977,92,6,464
+tt0076085,A Special Day,Una giornata particolare,1977,106,8.1,10533
+tt0076208,Iphigenia,Ifigeneia,1977,127,7.7,1442
+tt0076348,Madame Rosa,La vie devant soi,1977,105,7.2,985
+tt0076398,Operation Thunderbolt,Mivtsa Yonatan,1977,124,6.7,782
+tt0076517,Padre Padrone,Padre padrone,1977,113,7.4,3444
+tt0076843,The Turning Point,The Turning Point,1977,119,6.9,4045
+tt0077222,White Bim Black Ear,Belyy Bim Chernoe ukho,1977,182,8.2,1763
+tt0078012,Viva Italia!,I nuovi mostri,1977,115,7.1,1357
+tt0078122,Get Out Your Handkerchiefs,Préparez vos mouchoirs,1978,108,6.9,3276
+tt0078754,All That Jazz,All That Jazz,1979,123,7.9,25768
+tt0078788,Apocalypse Now,Apocalypse Now,1979,147,8.4,572597
+tt0078868,Confidence,Bizalom,1980,105,7.6,540
+tt0078875,The Tin Drum,Die Blechtrommel,1979,142,7.5,21168
+tt0079054,To Forget Venice,Dimenticare Venezia,1979,110,6.9,268
+tt0079517,Mama Turns 100,Mamá cumple 100 años,1979,98,7.3,1011
+tt0079579,Moscow Does Not Believe in Tears,Moskva slezam ne verit,1980,150,8.1,10683
+tt0079696,The Maids of Wilko,Panny z Wilka,1979,118,7.5,1066
+tt0080101,Life Is Beautiful,La vita è bella,1979,101,6.4,127
+tt0080610,The Last Metro,Le dernier métro,1980,131,7.4,11606
+tt0080979,Kagemusha,Kagemusha,1980,180,8,29930
+tt0081787,Yesterday,Yesterday,1981,95,5.5,119
+tt0082096,Das Boot,Das Boot,1981,149,8.3,219409
+tt0082222,Man of Iron,Czlowiek z zelaza,1981,156,7.4,2861
+tt0082269,Diva,Diva,1981,117,7.2,11264
+tt0082280,Muddy River,Doro no kawa,1981,105,7.9,679
+tt0082736,Mephisto,Mephisto,1981,144,7.8,8894
+tt0083226,Three Brothers,Tre fratelli,1981,113,7.2,1331
+tt0083543,Alsino and the Condor,Alsino y el cóndor,1982,89,6.6,237
+tt0083594,The Turning Point,Der Aufenthalt,1983,102,6.5,127
+tt0083789,Danton,Danton,1983,136,7.5,5970
+tt0083922,Fanny and Alexander,Fanny och Alexander,1982,188,8.1,53922
+tt0083946,Fitzcarraldo,Fitzcarraldo,1982,158,8.1,28986
+tt0084065,Hero,Hero,1982,92,3.5,42
+tt0084240,Julieta,Julieta,1983,87,7.2,16
+tt0084335,Missing,Missing,1982,122,7.7,17400
+tt0084338,The Mission,Ferestadeh,1983,103,6.6,165
+tt0084340,Les Misérables,Les misérables,1982,220,7.3,750
+tt0084472,Parasite,Parasite,1982,85,3.8,1994
+tt0085202,The Farewell,Avskedet,1982,90,5.7,40
+tt0085213,Le Bal,Le bal,1983,112,7.8,2374
+tt0085297,Carmen,Carmen,1983,102,7.6,2785
+tt0085298,Carmen,Carmen,1983,109,7.6,8
+tt0085370,Entre Nous,Coup de foudre,1983,110,7.2,1504
+tt0085674,Hero,Hero,1983,104,6.5,53
+tt0085767,The Revolt of Job,Jób lázadása,1983,105,7.5,469
+tt0085810,War and Peace,Krieg und Frieden,1982,123,7.1,74
+tt0087027,Camila,Camila,1984,107,6.9,1051
+tt0087034,Carmen,Carmen,1984,152,7.5,1387
+tt0087144,Dangerous Moves,La diagonale du fou,1984,110,6.6,952
+tt0087150,Dim Sum: A Little Bit of Heart,Dim Sum: A Little Bit of Heart,1985,88,6.4,350
+tt0087699,Beyond the Walls,Me'Ahorei Hasoragim,1984,103,6.9,288
+tt0088811,Angry Harvest,Bittere Ernte,1985,105,7.1,697
+tt0089115,Beyond the Walls,Extramuros,1985,118,6.1,184
+tt0089276,The Official Story,La historia oficial,1985,112,7.7,7307
+tt0089693,No Man's Land,No Man's Land,1985,110,6.5,94
+tt0089716,Colonel Redl,Oberst Redl,1985,144,7.6,2539
+tt0089748,When Father Was Away on Business,Otac na sluzbenom putu,1985,136,7.8,8275
+tt0090095,Subway,Subway,1985,104,6.6,13412
+tt0090206,Three Men and a Cradle,3 hommes et un couffin,1985,106,6.5,3185
+tt0090257,My Sweet Little Village,Vesnicko má stredisková,1985,98,8,3536
+tt0090295,The Warrior,Jaka Sembung,1981,92,6.3,199
+tt0090297,Water,Water,1985,115,6.2,2129
+tt0090352,Yesterday,Yesterday,1985,87,7,184
+tt0090374,Life Is Beautiful,Zivot je lep,1985,104,7.5,466
+tt0090563,Betty Blue,37°2 le matin,1986,120,7.4,16674
+tt0090576,The Assault,De aanslag,1986,155,7.2,2923
+tt0090985,The Decline of the American Empire,Le déclin de l'empire américain,1986,101,7.3,7441
+tt0091147,The Grandfather,Pedarbozorg,1986,\N,7.3,32
+tt0091288,Jean de Florette,Jean de Florette,1986,120,8,22975
+tt0091530,The Mission,The Mission,1986,125,7.4,53190
+tt0091699,Otello,Otello,1986,118,6.8,486
+tt0092100,Torment,Torment,1986,85,3.7,84
+tt0092584,Course Completed,Asignatura aprobada,1987,94,6.2,203
+tt0092603,Babette's Feast,Babettes gæstebud,1987,103,7.8,17014
+tt0092853,Dear John,Dear John,1988,108,4.7,21
+tt0093004,The Family,La famiglia,1987,127,7.4,1891
+tt0093638,No Man's Land,No Man's Land,1987,106,6.1,3968
+tt0093668,Pathfinder,Ofelas,1987,86,7.2,4681
+tt0093713,Pelle the Conqueror,Pelle erobreren,1987,157,7.8,9565
+tt0094828,Camille Claudel,Camille Claudel,1988,175,7.3,5857
+tt0095276,Hanussen,Hanussen,1988,140,7.2,1489
+tt0095606,The Music Teacher,Le maître de musique,1988,100,7.1,812
+tt0095675,Women on the Verge of a Nervous Breakdown,"Mujeres al borde de un ataque de ""nervios""",1988,88,7.5,33182
+tt0095719,The Nest,The Nest,1988,89,5.3,1937
+tt0095765,Cinema Paradiso,Nuovo Cinema Paradiso,1988,155,8.5,212704
+tt0096028,Salaam Bombay!,Salaam Bombay!,1988,113,8,7994
+tt0097635,Jesus of Montreal,Jésus de Montréal,1989,118,7.5,6610
+tt0097737,Leviathan,Leviathan,1989,98,5.8,17415
+tt0099334,Cyrano de Bergerac,Cyrano de Bergerac,1990,137,7.5,21401
+tt0099902,Ju Dou,Ju Dou,1990,95,7.7,7134
+tt0100389,Open Doors,Porte aperte,1990,108,7.1,738
+tt0100470,Journey of Hope,Reise der Hoffnung,1990,110,7.5,1787
+tt0100557,The Nasty Girl,Das schreckliche Mädchen,1990,94,7.3,2326
+tt0100846,Underground,Underground,1989,90,3.8,40
+tt0101410,Barton Fink,Barton Fink,1991,116,7.7,107711
+tt0101526,Children of Nature,Börn náttúrunnar,1991,82,7.3,1306
+tt0101640,Raise the Red Lantern,Da hong deng long gao gao gua,1991,125,8.1,27548
+tt0101700,Delicatessen,Delicatessen,1991,99,7.6,77188
+tt0102426,Mediterraneo,Mediterraneo,1991,96,7.5,12956
+tt0102571,The Elementary School,Obecná skola,1991,100,8,2579
+tt0102663,The Pianist,The Pianist,1991,112,4.7,119
+tt0103176,Close to Eden,Urga,1991,119,7.7,3275
+tt0104046,Daens,Daens,1992,138,7.5,3640
+tt0104350,The Best Intentions,Den goda viljan,1992,180,7.8,2780
+tt0104403,Hedd Wyn,Hedd Wyn,1992,123,7,340
+tt0104412,Hero,Hero,1992,119,6.5,20341
+tt0104507,Indochine,Indochine,1992,159,7.1,8844
+tt0104774,A Place in the World,Un lugar en el mundo,1992,120,7.8,2187
+tt0105323,Scent of a Woman,Scent of a Woman,1992,156,8,243204
+tt0106332,Farewell My Concubine,Ba wang bie ji,1993,171,8.1,23314
+tt0106966,Strawberry and Chocolate,Fresa y chocolate,1993,108,7.4,5088
+tt0107156,The Wedding Banquet,Xi yan,1993,106,7.7,13232
+tt0107617,The Scent of Green Papaya,Mùi du du xanh,1993,104,7.3,7445
+tt0107822,The Piano,The Piano,1993,121,7.6,75196
+tt0108290,Tango,Tango,1993,88,6.1,1163
+tt0109948,The Square,Guang Chang,1994,100,7.5,13
+tt0110880,Dust of Life,Poussières de vie,1995,87,6.1,92
+tt0110882,Before the Rain,Pred dozhdot,1994,113,8,13242
+tt0110912,Pulp Fiction,Pulp Fiction,1994,154,8.9,1725765
+tt0111579,Burnt by the Sun,Utomlennye solntsem,1994,135,7.9,13607
+tt0111797,Eat Drink Man Woman,Yin shi nan nu,1994,124,7.8,17337
+tt0112379,Antonia's Line,Antonia,1995,102,7.4,7872
+tt0112942,Electra,Electra,1996,87,3.3,802
+tt0113720,All Things Fair,Lust och fägring stor,1995,130,6.9,5368
+tt0113828,Les Misérables,Les misérables,1995,175,7.4,3497
+tt0114212,O Quatrilho,O Quatrilho,1995,92,6.7,1241
+tt0114787,Underground,Underground,1995,170,8.1,52486
+tt0114808,The Star Maker,L'uomo delle stelle,1995,113,7.4,4610
+tt0116114,Diva,Diva,1996,\N,5.9,8
+tt0116185,Elle,Elle,1995,86,6.7,17
+tt0116692,Beyond Silence,Jenseits der Stille,1996,109,7.4,3976
+tt0116754,Prisoner of the Mountains,Kavkazskiy plennik,1996,99,7.5,4028
+tt0116790,Kolya,Kolja,1996,105,7.8,13938
+tt0117050,A Chef in Love,Shekvarebuli kulinaris ataserti retsepti,1996,100,6.6,589
+tt0117477,Ridicule,Ridicule,1996,102,7.4,6920
+tt0117817,The Other Side of Sunday,Søndagsengler,1996,103,6.8,1132
+tt0117833,Tango,Tango,1996,58,5.5,14
+tt0117959,The Truce,La tregua,1997,125,6.6,1526
+tt0118799,Life Is Beautiful,La vita è bella,1997,116,8.6,582455
+tt0118849,Children of Heaven,Bacheha-Ye aseman,1997,89,8.3,58217
+tt0119448,Character,Karakter,1997,122,7.7,10135
+tt0119586,Lucie Aubrac,Lucie Aubrac,1997,115,6.6,1121
+tt0119683,Les Misérables,Les Misérables,1998,134,7.5,36804
+tt0119815,Four Days in September,"O Que é Isso, Companheiro?",1997,110,7.4,4330
+tt0120090,Secrets of the Heart,Secretos del corazón,1997,105,7.1,1655
+tt0120274,Tango,Tango,1998,115,7.1,2709
+tt0120408,The Eel,Unagi,1997,117,7.4,5228
+tt0122194,Trash,Trash,1999,95,5.6,305
+tt0123102,Hero,Hero,1983,173,6.7,710
+tt0124207,The Thief,Vor,1997,96,7.7,4682
+tt0129320,First Love,Primo amore,1978,115,6.7,229
+tt0130946,Plácido,Plácido,1986,96,NA,NA
+tt0131702,Downfall,Der Absturz,1923,\N,6.9,12
+tt0133342,First Love,Ahava Rishonah,1982,90,6.6,5
+tt0135508,The Damned,Oi kolasmenoi,1953,80,NA,NA
+tt0136242,Hero,Ma Yong Zhen,1997,97,6.3,504
+tt0140620,The Promised Land,La tierra prometida,1973,80,6.9,62
+tt0140888,Central Station,Central do Brasil,1998,110,8,33978
+tt0141627,Mustang,Mustang,1975,94,6.3,34
+tt0146328,The Turning Point,The Turning Point,1920,\N,NA,NA
+tt0150474,"Yesterday, Today and Tomorrow","Eoje, oneul, geurigo naeil",1975,88,NA,NA
+tt0157177,Water,Water,1968,\N,NA,NA
+tt0157676,Outside the Law,Fuera de la ley,1998,91,5.4,5
+tt0158302,Under the Sun,Under solen,1998,130,6.7,2212
+tt0159525,The Last Chance,The Last Chance,1937,76,5.9,8
+tt0159808,Underground,Underground,1997,\N,7,38
+tt0160116,Carmen,Carmen,1909,\N,4.4,10
+tt0160166,Cyrano de Bergerac,Cirano di Bergerac,1923,113,6.8,274
+tt0160388,The Hunt,The Hunt,1997,90,7.3,24
+tt0160445,The Last Chance,The Last Chance,1926,52,7.1,7
+tt0161860,Nowhere in Africa,Nirgendwo in Afrika,2001,141,7.5,12012
+tt0163529,The Assault,The Assault,1998,85,4,157
+tt0163707,The Last Chance,Scacco internazionale,1968,100,5.8,23
+tt0167509,Life Is Beautiful,Zivot je krásný,1940,98,7.4,30
+tt0170783,Yesterday,Vchera,1988,84,9.1,3039
+tt0176415,The Grandfather,El abuelo,1998,151,7.3,1658
+tt0178299,Carmen,Carmen,1943,96,7,14
+tt0180877,Nights and Days,Noci i jutra,1959,97,5.8,8
+tt0181830,Solomon & Gaenor,Solomon and Gaenor,1999,105,6.8,1119
+tt0182028,Cyrano de Bergerac,Cyrano de Bergerac,1946,100,6.2,19
+tt0185125,All About My Mother,Todo sobre mi madre,1999,101,7.8,84142
+tt0186508,Buena Vista Social Club,Buena Vista Social Club,1999,105,7.6,15811
+tt0186715,"Yesterday, Today and Tomorrow","Yesterday, Today and Tomorrow",1986,87,7.4,9
+tt0187542,Taxi Driver,Taxi Driver,1978,\N,5.4,30
+tt0189744,Miss Julie,Miss Julie,1999,103,6.2,1424
+tt0190332,"Crouching Tiger, Hidden Dragon",Wo hu cang long,2000,120,7.8,245337
+tt0191065,Danton,Danton,1932,\N,NA,NA
+tt0192772,War and Peace,War and Peace,1998,\N,NA,NA
+tt0192947,12,12,2003,124,7.5,40
+tt0195214,Revanche,Revanche,1922,\N,NA,NA
+tt0197494,Outside the Law,Fuera de la ley,1937,90,6.8,22
+tt0200071,Rosetta,Rosetta,1999,95,7.5,12025
+tt0200541,The Salesman,Il commesso viaggiatore,2001,\N,5.6,9
+tt0201289,Underground,Underground,1991,87,NA,NA
+tt0202644,Underground,Underground,1998,93,7,53
+tt0206608,The Farewell,Abschied - Brechts letzter Sommer,2000,97,6.2,164
+tt0208552,Private Life,La vida privada,1996,\N,NA,NA
+tt0209037,Everybody's Famous!,Iedereen beroemd!,2000,97,6.9,3065
+tt0209510,Twin Sisters,Zi mei hua,1934,82,6.2,85
+tt0210727,Himalaya,Himalaya - l'enfance d'un chef,1999,108,7.5,4928
+tt0211323,Crossfire,Crossfire,1998,90,5.6,51
+tt0211915,Amélie,Le fabuleux destin d'Amélie Poulain,2001,122,8.3,673890
+tt0212040,Carmen,Carmen,1969,164,7.8,54
+tt0213761,Kapo,Kapo,1999,55,8.4,16
+tt0214211,Turkish Delight,Turkish Delight,1986,\N,6.7,17
+tt0216787,The Taste of Others,Le goût des autres,2000,112,7.2,8684
+tt0218144,The Last Metro,Dernier métro,1945,98,7.1,8
+tt0218956,Electra,Electra,1990,96,3.1,65
+tt0219972,Underground,Podpolye,1918,\N,NA,NA
+tt0220644,The Mission,Cheung foh,1999,84,7.5,4708
+tt0220801,Tango,Tango,1990,\N,NA,NA
+tt0224251,Three,Three,1987,\N,NA,NA
+tt0229432,First Love,Hatsukoi,2000,113,6.9,215
+tt0230500,A Man and a Woman,A Man and a Woman,1916,\N,NA,NA
+tt0230859,Taxi Driver,Taxi Driver,1973,118,6.2,26
+tt0234288,Divided We Fall,Musíme si pomáhat,2000,120,7.6,4762
+tt0235658,Paradise Now,Paradise Now,1970,105,5.5,16
+tt0237853,Three Brothers,Tri brata,2000,80,6.9,41
+tt0238936,Devdas,Devdas,2002,185,7.6,36193
+tt0240200,Water,Water,2005,117,7.7,13896
+tt0242027,Yesterday,Tegnap,1919,46,NA,NA
+tt0245157,Zus & Zo,Zus & zo,2001,106,6.2,1543
+tt0245319,No,Nie,1978,90,7.6,5
+tt0245574,Y Tu Mamá También,Y tu mamá también,2001,106,7.6,110382
+tt0245712,Amores Perros,Amores perros,2000,154,8.1,213164
+tt0245942,Hero,Hero,1984,\N,6.3,31
+tt0249859,Otello,Otello,1974,142,7.7,37
+tt0250422,Hero,Hero,1992,\N,NA,NA
+tt0251298,No Man's Land,No Man's Land,1964,72,6.7,6
+tt0253474,The Pianist,The Pianist,2002,150,8.5,679268
+tt0256721,Devdas,Devdas,1928,\N,6.4,21
+tt0263089,Torment,Azap,1973,85,6.8,85
+tt0264083,Tango,Tango,1984,\N,NA,NA
+tt0265343,Monsoon Wedding,Monsoon Wedding,2001,114,7.3,22609
+tt0266870,Crossfire,Kurosufaia,2000,115,6.2,455
+tt0267065,A Simple Story,Une si simple histoire,1970,97,8.6,11
+tt0267667,The Child,Lekroo,2000,133,7.4,11
+tt0267884,Revanche,Revanche,1983,105,6.4,79
+tt0271815,Tango,Tango,1933,87,NA,NA
+tt0272217,No Man's Land,No Man's Land,2000,90,7.2,41
+tt0275083,The Warrior,Musa,2001,158,7.2,10526
+tt0276127,The Family,The Family,1970,45,2.6,8
+tt0277352,Subway,Subway,1983,66,6.9,10
+tt0277799,Life Is Beautiful,Life Is Beautiful,2000,\N,6.3,619
+tt0279064,Elling,Elling,2001,89,7.5,13707
+tt0280990,The Nest,Nid de guêpes,2002,107,6.7,5203
+tt0281869,Outside the Law,Fuera de la ley,1966,90,NA,NA
+tt0283509,No Man's Land,No Man's Land,2001,98,7.9,43010
+tt0284193,First Love,El hub el awal,1945,\N,NA,NA
+tt0290014,Outside the Law,Outside the Law,2002,90,4.3,351
+tt0290948,Immortal Love,Ölmeyen ask,1966,85,7.3,46
+tt0292542,Son of the Bride,El hijo de la novia,2001,123,7.8,14133
+tt0295054,The Damned,Zatracení,2002,98,5.6,47
+tt0295682,The Warrior,The Warrior,2001,86,6.7,2353
+tt0296032,Scarecrow,Kakashi,2001,86,5.2,593
+tt0296187,Secrets of the Heart,Secrets of the Heart,2000,\N,NA,NA
+tt0299977,Hero,Ying xiong,2002,107,7.9,169444
+tt0306110,The Sweet Life,The Sweet Life,2003,86,7.2,47
+tt0307686,Yesterday,Yesterday,1968,\N,NA,NA
+tt0310154,In This World,In This World,2002,88,7.3,4009
+tt0310910,Confidence,Confidence,2003,97,6.7,32712
+tt0311356,War and Peace,Jang Aur Aman,2002,148,8.2,119
+tt0311519,The Man Without a Past,Mies vailla menneisyyttä,2002,97,7.7,21077
+tt0312514,Taxi Driver,Byeolmyeongbuteun unjeonsa,1977,100,NA,NA
+tt0318110,Tango,Tango,1969,76,NA,NA
+tt0318268,Water,Ab,1975,\N,7.2,13
+tt0318364,First Love,Cheot sarang,1965,82,NA,NA
+tt0322004,Devdas,Devdas,2002,140,7.4,90
+tt0322674,Twin Sisters,De Tweeling,2002,137,7.4,6305
+tt0324064,The Star Maker,The Star Maker,1968,\N,6.5,8
+tt0326441,Yesterday,Yeseuteodei,2002,121,5,714
+tt0330428,If,If,1916,\N,NA,NA
+tt0332227,Macario,Macario,1973,\N,NA,NA
+tt0332458,A Simple Story,Une simple histoire,1959,68,7,139
+tt0334469,Tango,Tango,1976,\N,NA,NA
+tt0338135,The Barbarian Invasions,Les invasions barbares,2003,99,7.6,27466
+tt0338309,Evil,Ondskan,2003,113,7.8,34456
+tt0339786,Three,Three,2002,\N,8.4,16
+tt0342076,First Love,Awal gharam,1956,\N,NA,NA
+tt0342973,War and Peace,Sensô to heiwa,1947,100,6.3,6
+tt0351817,The Twilight Samurai,Tasogare Seibei,2002,129,8.1,21168
+tt0352230,Carmen,Carmen,2003,119,6.1,1877
+tt0352699,Parasite,Parasite,2004,93,2.5,498
+tt0360456,Carmen,Carmen,1995,98,6.1,46
+tt0360652,If,If,2003,88,5.7,35
+tt0361503,Devdas,Devdas,1935,141,6.7,33
+tt0362961,The Pedestrian,The Pedestrian,2003,90,5.8,42
+tt0363163,Downfall,Der Untergang,2004,156,8.2,316100
+tt0363589,Elephant,Elephant,2003,81,7.2,82594
+tt0368798,First Love,Ilk ask,1960,\N,NA,NA
+tt0369702,The Sea Inside,Mar adentro,2004,126,8,74597
+tt0370260,The Last Chance,Akher forsa,1962,\N,NA,NA
+tt0371982,Taxi Driver,Taxi Driver,1981,129,8.4,36
+tt0372361,Carmen,Karmen,2003,113,6.4,139
+tt0372776,First Love,Awal hub,1964,\N,4.3,14
+tt0372824,The Chorus,Les choristes,2004,97,7.9,54466
+tt0375827,If,If,2000,90,4.6,9
+tt0376659,Immortal Love,El hub el khaled,1965,\N,7.2,21
+tt0378849,Tango,Tango,1979,53,6.7,7
+tt0379906,The Nest,The Nest,2003,\N,6.1,18
+tt0382330,As It Is in Heaven,Så som i himmelen,2004,133,7.5,15664
+tt0383166,12,12,2003,90,6.9,23
+tt0383862,Roma,Roma,2004,155,7.3,1139
+tt0384246,The Family,Karei-naru ichizoku,1974,211,7.4,36
+tt0385290,Timbuktu,Timbuktu,2004,94,6.8,22
+tt0388484,The Truce,La tregua,2003,101,4,105
+tt0392136,The Hunt,The Hunt,2002,108,7,10
+tt0396175,Crossfire,Pohwasokui shibjaga,1956,\N,NA,NA
+tt0396532,First Love,Cinta Pertama,1973,110,7.4,9
+tt0396818,First Love,Primo amore,2004,100,6.8,1072
+tt0397453,Hero,Hero,1985,\N,6.1,14
+tt0401312,Downfall,Chang,1997,105,6.4,120
+tt0405094,The Lives of Others,Das Leben der Anderen,2006,137,8.4,337750
+tt0405508,Rang De Basanti,Rang De Basanti,2006,167,8.2,104647
+tt0407872,The Thief,Hirsiz,1965,95,7,28
+tt0411281,Dersu Uzala,Dersu Uzala,1961,86,7.3,198
+tt0418229,Taxi Driver,Taxi Driver,1944,\N,2,15
+tt0419279,Yesterday,Yesterday,2004,90,7.6,2142
+tt0419887,The Kite Runner,The Kite Runner,2007,128,7.6,75624
+tt0431383,Les Misérables,Sefiller,1967,86,7,70
+tt0441909,Volver,Volver,2006,121,7.6,90745
+tt0444182,Days of Glory,Indigènes,2006,123,7,13591
+tt0445620,Paradise Now,Paradise Now,2005,91,7.4,21814
+tt0446013,Pathfinder,Pathfinder,2007,99,5.4,41583
+tt0448923,Evil,Pisaj,2004,110,6.3,150
+tt0456396,The Child,L'enfant,2005,95,7.5,16948
+tt0457430,Pan's Labyrinth,El laberinto del fauno,2006,118,8.2,591576
+tt0457655,After the Wedding,Efter brylluppet,2006,120,7.7,30475
+tt0468565,Tsotsi,Tsotsi,2005,94,7.2,27135
+tt0471115,Carmen,Carmen,1953,\N,NA,NA
+tt0472043,Apocalypto,Apocalypto,2006,139,7.8,277817
+tt0478927,Private Life,La vie privée,2006,75,3.9,18
+tt0481999,Hero,Hero,1998,88,NA,NA
+tt0488478,12,12,2007,159,7.7,13467
+tt0497535,The Truce,La trêve,1968,90,8.9,7
+tt0758732,Beaufort,Beaufort,2007,131,6.7,4403
+tt0765432,The Baader Meinhof Complex,Der Baader Meinhof Komplex,2008,150,7.4,34331
+tt0765850,Water,Water,2004,72,6.5,31
+tt0788040,Carmen,Carmen,1941,\N,NA,NA
+tt0808417,Persepolis,Persepolis,2007,96,8,84658
+tt0813129,Evil,To kako,2005,83,5.5,1659
+tt0813547,The Counterfeiters,Die fälscher,2007,99,7.6,41855
+tt0818543,Z,Z,NA,\N,NA,NA
+tt0827999,Corpus Christi,Boze Cialo,2006,50,NA,NA
+tt0846910,Carmen,Carmen,1929,\N,NA,NA
+tt0870209,Underground,Underground,2007,95,4.2,547
+tt0929809,The Class,Çilgin Dersane,2007,100,1.9,3450
+tt0938752,The Nest,Le nid,1926,\N,NA,NA
+tt0976234,The Lives of Others,The Lives of Others,NA,\N,NA,NA
+tt0988108,The Class,Klass,2007,99,7.9,13864
+tt0989757,Dear John,Dear John,2010,108,6.3,132938
+tt0997157,Hero,Hero,2007,130,6.8,735
+tt1000706,Dust of Life,Dust of Life,2006,90,8.7,16
+tt10160742,Cyrano de Bergerac,Cyrano de Bergerac,2019,\N,NA,NA
+tt10195294,Pathfinder,Pathfinder,NA,\N,NA,NA
+tt10199590,Les Misérables,Les misérables,2019,104,7.8,5430
+tt10228168,First Love,Hatsukoi,2019,108,7,2007
+tt10268580,The Warrior,The Warrior,NA,\N,NA,NA
+tt10309408,The Deluge,The Deluge,NA,\N,NA,NA
+tt1034079,The Turning Point,The Turning Point,2007,71,NA,NA
+tt10343874,The Warrior,The Warrior,NA,\N,NA,NA
+tt1034397,Crossfire,Les insoumis,2008,91,5.8,641
+tt10369584,The Warrior,The Warrior,2020,\N,NA,NA
+tt10388520,Hero,Hero,NA,\N,NA,NA
+tt10449052,No Man's Land,No Man's Land,2020,\N,NA,NA
+tt1066433,Diva,Diva,2007,\N,6.3,7
+tt1068646,The Class,Entre les murs,2008,128,7.5,32949
+tt1069238,Departures,Okuribito,2008,130,8.1,46365
+tt10692578,Carmen,Carmen,NA,\N,NA,NA
+tt1069264,The Way,Put,2009,90,4.2,278
+tt10709232,Hero,Hero,2019,164,6.5,934
+tt10727176,Z,Z,2019,\N,NA,NA
+tt10753468,Leviathan,Leviathan,2020,\N,NA,NA
+tt1076967,The Damned,The Damned,NA,\N,NA,NA
+tt1077070,Underground,ASD. Alma sin dueño,2010,\N,6.7,40
+tt1077262,Ajami,Ajami,2009,124,7.3,5793
+tt1085507,The Square,The Square,2008,105,6.7,5296
+tt10921460,War and Peace,War and Peace,2019,30,NA,NA
+tt10981332,First Love,First Love,2020,\N,NA,NA
+tt11011434,First Love,First Love,2019,\N,NA,NA
+tt1101672,The Warrior,Wojownik,2007,85,7.5,34
+tt11023766,The Family,The Family,NA,\N,NA,NA
+tt11024288,Devdas,Devdas,NA,122,NA,NA
+tt11198988,Scarecrow,Scarecrow,NA,\N,NA,NA
+tt11216394,Otello,Otello,1957,\N,NA,NA
+tt11252688,First Love,First Love,2021,\N,NA,NA
+tt11359102,Honeyland,Honeyland,1995,58,NA,NA
+tt11430022,The Brothers Karamazov,The Brothers Karamazov,2014,134,NA,NA
+tt11483450,Missing,Missing,2005,90,NA,NA
+tt11488664,Amour,Oi yan,1992,\N,NA,NA
+tt1149362,The White Ribbon,Das weiße Band - Eine deutsche Kindergeschichte,2009,144,7.8,65038
+tt1149611,The Child,Çocuk,2008,73,2.9,497
+tt11584606,The Brothers Karamazov,The Brothers Karamazov,2016,120,NA,NA
+tt1159494,Crossfire,Crossfire,1966,\N,NA,NA
+tt1164999,Biutiful,Biutiful,2010,148,7.5,82565
+tt11690722,Underground,Deogeulaundeu,2019,88,NA,NA
+tt1173716,First Love,Hatsu-koi,2007,96,5.7,72
+tt1173745,Revanche,Revanche,2008,121,7.5,13234
+tt1181343,La Traviata,La Traviata,2006,144,8.3,29
+tt1182337,Yesterday,Yesterday,1967,\N,NA,NA
+tt1185616,Waltz with Bashir,Vals Im Bashir,2008,90,8,53494
+tt1194447,Water,Water,NA,\N,NA,NA
+tt1206488,The Milk of Sorrow,La teta asustada,2009,95,6.7,6437
+tt1230439,Trash,Trash,2009,91,5.2,103
+tt1235166,A Prophet,Un prophète,2009,155,7.9,90005
+tt1255953,Incendies,Incendies,2010,131,8.3,132992
+tt1276419,A Royal Affair,En kongelig affære,2012,137,7.5,42219
+tt1305806,The Secret in Their Eyes,El secreto de sus ojos,2009,129,8.2,180380
+tt1308670,Three,Three,2008,\N,4.1,12
+tt1313160,The Mission,The Mission,NA,\N,NA,NA
+tt1326278,Yesterday,Yesterday,2009,95,5.8,71
+tt1329126,Cyrano de Bergerac,Cyrano de Bergerac,2008,140,7,19
+tt1340107,In a Better World,Hævnen,2010,118,7.6,37270
+tt1362468,The Promised Land,The Promised Land,2009,63,4,9
+tt1379087,The Mission,The Mission,2008,\N,NA,NA
+tt1379182,Dogtooth,Kynodontas,2009,97,7.3,74103
+tt1388356,No Man's Land,No Man's Land,2009,\N,NA,NA
+tt1390476,Miss Julie,Miss Julie,2009,93,5.2,10
+tt1417075,In Darkness,In Darkness,2011,145,7.3,9648
+tt1440266,Pina,Pina,2011,103,7.7,13900
+tt1441912,The Way,The Way,2010,123,7.4,28828
+tt1445520,Footnote,Hearat Shulayim,2011,107,7.1,5492
+tt1456660,No Man's Land,Wu ren qu,2013,118,7.3,1885
+tt1518209,The Hunt,Medibas,2009,120,5.4,32
+tt1519473,Timbuktu,Timbuktu,NA,\N,NA,NA
+tt1557561,Downfall,Downfall,2005,90,NA,NA
+tt1562437,Missing,Sil jong,2009,99,6,539
+tt1574615,Journey of Hope,Journey of Hope,2003,\N,NA,NA
+tt1577111,Underground,Underground,2010,83,6.9,62
+tt1577123,Yesterday,Yesterday,2009,60,NA,NA
+tt1579822,No,No,2005,132,NA,NA
+tt1583266,Hero,Hero,2008,\N,3.3,43
+tt1602620,Amour,Amour,2012,127,7.9,88150
+tt1613750,Kon-Tiki,Kon-Tiki,2012,118,7.2,43366
+tt1645769,Loveless,Loveless,2011,91,7.3,21
+tt1657885,First Love,First Love,2010,52,7.1,95
+tt1663702,Water,Water,2006,87,5.7,202
+tt1666154,Before the Rain,Before the Rain,2010,90,7.5,16
+tt1692226,The Way,The Way,2010,107,7,8
+tt1707386,Les Misérables,Les Misérables,2012,158,7.6,295503
+tt1717733,Underground,Underground,NA,\N,NA,NA
+tt1728973,The Family,The Family,2011,88,3.8,1217
+tt1730118,Downfall,Downfall,1964,59,6.9,38
+tt1787747,The Salesman,Le vendeur,2011,107,7,567
+tt1787927,Torment,Torment,2010,64,NA,NA
+tt1793239,The Assault,L'assaut,2010,91,6.1,3402
+tt1811371,Underground,Underground,2011,87,3.9,1541
+tt1820488,War Witch,Rebelle,2012,90,7.1,6820
+tt1821593,Bullhead,Rundskop,2011,129,7.4,21347
+tt1828216,Journey of Hope,Journey of Hope,2010,46,NA,NA
+tt1832382,A Separation,Jodaeiye Nader az Simin,2011,123,8.3,206664
+tt1920996,The Star Maker,La máquina que hace estrellas,2012,80,7.3,35
+tt1921111,The Child,The Child,2012,100,4.2,804
+tt1921149,Trash,Trash,2014,114,7.2,19413
+tt1961271,Devdas,Devdas,2013,150,5,151
+tt1987567,First Love,First Love,2010,135,6.2,38
+tt1988822,Trash,Trash,2010,75,NA,NA
+tt2011971,Monsieur Lazhar,Monsieur Lazhar,2011,95,7.5,18588
+tt2024519,The Broken Circle Breakdown,The Broken Circle Breakdown,2012,111,7.8,37593
+tt2059255,No,No,2012,118,7.4,22056
+tt2069756,Dogman,Dogman,2012,91,3.3,243
+tt2077889,The Promised Land,The Promised Land,NA,\N,NA,NA
+tt2083272,No Man's Land,No Man's Land,NA,\N,NA,NA
+tt2091270,Crossfire,Crossfire,2011,\N,NA,NA
+tt2106476,The Hunt,Jagten,2012,115,8.3,257043
+tt2119492,Otello,Otello,2012,\N,7.6,5
+tt2126386,The Warrior,The Warrior,2011,87,6.9,17
+tt2132477,Taxi Driver,Taxi Driver,1970,135,NA,NA
+tt2147964,Roma,Roma,2011,48,NA,NA
+tt2176228,As It Is in Heaven,As It Is in Heaven,2014,86,7.3,78
+tt2186715,Cold War,Hon zin,2012,102,6.7,3980
+tt2218198,If,If,NA,98,NA,NA
+tt2263896,Beyond the Walls,Beyond the Walls,2012,48,NA,NA
+tt2298738,Miss Julie,Fröken Julie,2013,85,4,117
+tt2298990,Life Is Beautiful,Life Is Beautiful,2012,167,6.3,645
+tt2299792,A Special Day,Un giorno speciale,2012,89,5.7,250
+tt2322182,Otello,Otello,1958,135,NA,NA
+tt2332522,Leviathan,Leviathan,2012,87,6.6,3059
+tt2375605,The Act of Killing,The Act of Killing,2012,117,8.2,32825
+tt2378581,Water,Water,2014,\N,NA,NA
+tt2382622,After the Wedding,After the Wedding,2017,88,4.5,118
+tt2387408,The Damned,Gallows Hill,2013,87,5.2,5761
+tt2390250,Water,Water,2012,120,7.6,11
+tt2395102,The Salesman,IBM and the Holocaust,NA,\N,NA,NA
+tt2401079,The Promised Land,The Promised Land,2012,77,NA,NA
+tt2402623,Beyond the Walls,Hors les murs,2012,98,6.6,1293
+tt2429086,Hero,Hero,2012,163,3.7,205
+tt2430956,No,No,2012,74,8.6,5
+tt2434540,Missing,Yukue fumei,2012,72,NA,NA
+tt2486682,The Square,Al midan,2013,108,8.1,8262
+tt2488406,No Man's Land,No Man's Land,NA,\N,NA,NA
+tt2526066,Beyond Silence,Beyond Silence,2012,39,NA,NA
+tt2547366,Carmen,Carmen,2013,89,6.9,43
+tt2597828,The Eel,The Eel,NA,\N,NA,NA
+tt2640570,The Hunt,The Hunt,2012,74,4.4,119
+tt2650314,Journey of Hope,Journey of Hope,NA,\N,NA,NA
+tt2652174,Iphigenia,Iphigenia,2011,59,NA,NA
+tt2667960,Miss Julie,Miss Julie,2014,129,5.4,4817
+tt2718492,Ida,Ida,2013,82,7.4,49414
+tt2719830,Cyrano de Bergerac,Cyrano de Bergerac,2012,146,NA,NA
+tt2758880,Winter Sleep,Kis Uykusu,2014,196,8.2,40271
+tt2769814,Torment,Torment,1990,86,5.1,16
+tt2783108,The Turning Point,The Turning Point,2013,62,5.8,6
+tt2795366,Private Life,Private Life,1983,\N,NA,NA
+tt2802154,Leviathan,Leviafan,2014,140,7.6,45709
+tt2828140,Torment,Torment,2014,91,6,31
+tt2833746,Corpus Christi,Corpus Christi,2013,\N,2.8,5
+tt2900822,Torment,Torment,2013,82,4.7,2564
+tt2963918,Leviathan,Leviathan,2012,72,8.5,6
+tt3011894,Wild Tales,Relatos salvajes,2014,122,8.1,160700
+tt3060244,Three Brothers,Tri bratri,2014,90,5.7,326
+tt3060600,Elle,Elle,2013,57,7.1,9
+tt3098406,No Man's Land,No Man's Land,NA,\N,NA,NA
+tt3101724,Crossfire,Crossfire,2012,92,NA,NA
+tt3108154,The Hunt,The Hunt,2016,100,4.4,43
+tt3109648,First Love,First Love,2013,\N,7.5,18
+tt3158716,The Ninth Circle,The Ninth Circle,NA,\N,NA,NA
+tt3170902,Theeb,Theeb,2014,100,7.2,9427
+tt3212670,Private Life,Private Life,2012,90,5.7,372
+tt3235566,The Last Chance,The Last Chance,2011,91,NA,NA
+tt3286436,A Man and a Woman,A Man and a Woman,NA,\N,NA,NA
+tt3297204,The Damned,Repentance,NA,\N,NA,NA
+tt3299370,No Man's Land,No Man's Land,NA,\N,NA,NA
+tt3317918,Harry and the Butler,Harry and the Butler,NA,\N,NA,NA
+tt3529894,Twin Sisters,Tvillingsøstrene,2013,58,7.7,242
+tt3643154,First Love,First Love,1961,\N,NA,NA
+tt3716530,Elle,Elle,2016,130,7.1,57453
+tt3723646,Scarecrow,Scarecrow,2014,\N,NA,NA
+tt3731148,The Mission,The Mission,2015,93,NA,NA
+tt3753108,The Square,A tér,2013,52,7,6
+tt3754474,If,If,NA,100,NA,NA
+tt3757774,Turkish Delight,Turkish Delight,2017,\N,NA,NA
+tt3758854,The Mission,The Mission,NA,\N,NA,NA
+tt3797834,Missing,Missing,NA,\N,NA,NA
+tt3808342,Son of Saul,Saul fia,2015,107,7.5,41740
+tt3829360,Leviathan,Leviathan,NA,\N,NA,NA
+tt3830162,A War,Krigen,2015,115,7.1,9123
+tt3966404,Mustang,Mustang,2015,97,7.6,32748
+tt3972110,The Assault,The Assault,2017,90,3.7,100
+tt4080728,A Man Called Ove,En man som heter Ove,2015,116,7.7,42393
+tt4155318,The Family,The Family,2013,152,7.4,16
+tt4285496,Embrace of the Serpent,El abrazo de la serpiente,2015,125,7.9,18761
+tt4337846,Pathfinder,Pathfinder,NA,\N,NA,NA
+tt4375304,Carmen,Carmen,2013,126,NA,NA
+tt4444038,Diva,Diva,NA,\N,NA,NA
+tt4467202,Hero,Hero,2015,145,3.6,2066
+tt4533608,Three,Three,NA,\N,NA,NA
+tt4544116,The Sweet Life,The Sweet Life,NA,\N,NA,NA
+tt4667146,Missing,Missing,2011,\N,NA,NA
+tt4668042,La Traviata,La Traviata,1974,70,NA,NA
+tt4735860,If,If,NA,\N,NA,NA
+tt4760998,Hero,Hero,2006,110,7,70
+tt4838534,The Sweet Life,The Sweet Life,2016,90,6.2,1493
+tt4852906,Elle,Elle,NA,\N,NA,NA
+tt4882426,The Leopard,The Leopard,NA,\N,NA,NA
+tt4925340,The Nest,The Nest (Il nido),2019,107,5.9,525
+tt4940612,The Promised Land,Hui dao bei ai de mei yi tian,2015,102,6.6,24
+tt4995790,The Square,The Square,2017,151,7.2,48804
+tt5041574,Three,Three,NA,\N,NA,NA
+tt5116988,Under the Sun,Under the Sun,NA,\N,NA,NA
+tt5144142,Crossfire,Crossfire,NA,\N,NA,NA
+tt5155360,First Love,First Love,2019,80,7,11
+tt5156896,Le Grand Voyage,Le Grand Voyage,2015,98,NA,NA
+tt5161028,The Family,Druzina,2017,106,7.7,134
+tt5164184,In Darkness,In Darkness,2018,100,5.8,10956
+tt5186714,The Salesman,Forushande,2016,124,7.8,45250
+tt5245974,Under the Sun,Under the Sun,2015,78,7.6,9
+tt5305130,Parasite,Parasite,NA,\N,NA,NA
+tt5369468,Missing,Missing,NA,\N,NA,NA
+tt5480544,The Mission,The Mission,2016,91,6.3,17
+tt5536610,Private Life,Private Life,2018,123,7.2,12622
+tt5537300,Cold War,Cold War,2017,96,6.7,69
+tt5581616,Under the Sun,Under the Sun,2016,95,NA,NA
+tt5606896,Three,Three,2016,78,NA,NA
+tt5607714,On Body and Soul,Teströl és lélekröl,2017,116,7.6,21052
+tt5613122,The Mission,The Mission,NA,\N,NA,NA
+tt5639354,A Fantastic Woman,Una Mujer Fantástica,2017,104,7.2,20169
+tt5648624,No Man's Land,No Man's Land,NA,\N,NA,NA
+tt5700648,A Man and a Woman,Nam-gwa yeo,2016,115,6.8,920
+tt5759256,No Man's Land,No Man's Land,2016,85,NA,NA
+tt5783112,The Hunt,Sanyang,2016,93,5,104
+tt5783250,The Nest,Il nido,2016,80,5.8,33
+tt5806374,Devdas,Devdas,1982,144,7.5,11
+tt5816894,Divided We Fall,Divided We Fall,2016,10,NA,NA
+tt5862398,No Man's Land,No Man's Land,2016,86,NA,NA
+tt5875420,The Thief,The Thief,NA,\N,NA,NA
+tt5904158,Hero,Hero,NA,\N,NA,NA
+tt5923478,La Vérité,La Vérité,2016,97,NA,NA
+tt5950490,Loveless,Loveless,NA,\N,NA,NA
+tt6044608,No Man's Land,No Man's Land,NA,\N,NA,NA
+tt6072768,Scarecrow,Scarecrow,NA,\N,NA,NA
+tt6155172,Roma,Roma,2018,135,7.7,124374
+tt6216234,The Way,The Way,2016,85,9.2,11
+tt6304162,Loveless,Nelyubov,2017,127,7.6,26108
+tt6322270,12,12,2019,100,NA,NA
+tt6325882,The Promised Land,The Promised Land,NA,\N,NA,NA
+tt6430934,Z,Z,1999,144,NA,NA
+tt6434368,Trash,Trash,2020,\N,NA,NA
+tt6467460,First Love,First Love,2017,\N,NA,NA
+tt6543652,Cold War,Zimna wojna,2018,89,7.6,41323
+tt6583992,Footnote,Footnote,2017,38,NA,NA
+tt6760028,Entre Nous,Entre Nous,2018,\N,5.7,11
+tt6768578,Dogman,Dogman,2018,103,7.2,18387
+tt6831772,Evil,Evil,2014,72,NA,NA
+tt6857290,Hero,Hero,2016,\N,NA,NA
+tt6875952,Carmen,Carmen,NA,\N,NA,NA
+tt6920114,Water,Water,2017,19,NA,NA
+tt7048622,The Insult,L'insulte,2017,113,7.7,12633
+tt7069784,The Family,The Family,2015,\N,NA,NA
+tt7094884,No Man's Land,No Man's Land,2016,25,NA,NA
+tt7098828,A Simple Story,A Simple Story,2016,52,NA,NA
+tt7145348,First Love,First Love,NA,\N,NA,NA
+tt7159036,The Conversation,The Conversation,2018,\N,NA,NA
+tt7167192,The Chorus,The Chorus,2018,170,NA,NA
+tt7282366,Divided We Fall,Divided We Fall,NA,\N,NA,NA
+tt7288658,Yesterday,Yesterday,2017,90,NA,NA
+tt7324476,Open Doors,Open Doors,2017,\N,7.8,6
+tt7343966,The Thief,The Thief,NA,85,NA,NA
+tt7384848,Missing,Missing,2018,120,5.7,1721
+tt7539080,Mustang,Mustang,1978,60,NA,NA
+tt7588122,Crossfire,Crossfire,NA,\N,NA,NA
+tt7608274,12,12,2017,104,7.4,22
+tt7616548,12,12,NA,\N,NA,NA
+tt7644852,No Man's Land,No Man's Land,2018,77,NA,NA
+tt7704712,No,Non,2017,100,NA,NA
+tt7708690,Underground,Underground,NA,\N,NA,NA
+tt7717878,Water,Shui,1957,49,NA,NA
+tt7720054,Hero,Hero,2017,\N,NA,NA
+tt7762348,Scent of a Woman,Scent of a Woman,2009,86,NA,NA
+tt7822016,The Emigrants,The Emigrants,2015,105,NA,NA
+tt7846482,No Man's Land,No Man's Land,NA,\N,NA,NA
+tt7963100,The Farewell,The Farewell,2013,80,6.7,6
+tt7985692,After the Wedding,After the Wedding,2019,112,6.1,3071
+tt8052240,Scarecrow,Scarecrow,2017,46,7.6,37
+tt8075192,Shoplifters,Manbiki kazoku,2018,121,8,47181
+tt8079248,Yesterday,Yesterday,2019,116,6.9,79700
+tt8118162,Corpus Christi,Corpus Christi,NA,\N,NA,NA
+tt8244784,The Hunt,The Hunt,2020,115,NA,NA
+tt8267604,Capernaum,Capharnaüm,2018,126,8.4,39074
+tt8291806,Pain and Glory,Dolor y gloria,2019,113,7.6,34853
+tt8305936,Underground,Underground,NA,\N,NA,NA
+tt8338762,The Nest,The Nest,2020,107,6.2,30
+tt8417860,Elle,Elle,NA,\N,NA,NA
+tt8425674,The Child,The Child,NA,\N,NA,NA
+tt8577612,In This World,In This World,2018,100,NA,NA
+tt8637428,The Farewell,The Farewell,2019,100,7.7,31677
+tt8649186,Corpus Christi,Boze Cialo,2019,115,7.7,3939
+tt8894354,Days of Glory,Days of Glory,NA,\N,NA,NA
+tt8938174,Hero,Hero,2006,\N,NA,NA
+tt8991268,Honeyland,Honeyland,2019,89,8,7514
+tt8995218,Z,Z,2019,83,7.1,19
+tt8997088,Scarecrow,Scarecrow,NA,82,NA,NA
+tt9060390,First Love,First Love,2018,122,5.9,79
+tt9064764,Water,Water,2019,100,1.8,109
+tt9104092,Elle,Elle,2018,60,NA,NA
+tt9110566,The Damned,Mekulalim,2018,81,6.8,32
+tt9112156,Missing,Missing,2016,\N,NA,NA
+tt9257666,Crossfire,Crossfire,NA,\N,NA,NA
+tt9476466,Hero,Hero,1944,\N,NA,NA
+tt9512378,First Love,First Love,1992,\N,NA,NA
+tt9594442,The Nest,The Nest,NA,\N,NA,NA
+tt9641640,No Man's Land,No Man's Land,NA,\N,NA,NA
+tt9743420,First Love,Tinh dau tho ngay,2019,85,5.8,10
+tt9856484,The Hunt,The Hunt,NA,90,NA,NA
+tt9859514,The Warrior,The Warrior,NA,\N,NA,NA
