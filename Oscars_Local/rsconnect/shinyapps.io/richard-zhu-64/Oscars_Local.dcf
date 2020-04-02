@@ -1,0 +1,12 @@
+name: Oscars_Local
+title: Oscars_Local
+username:
+account: richard-zhu-64
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2040292
+bundleId: 2957106
+url: https://richard-zhu-64.shinyapps.io/Oscars_Local/
+when: 1585797810.16282
+asMultiple: FALSE
+asStatic: FALSE

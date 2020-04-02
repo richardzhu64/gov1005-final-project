@@ -111,7 +111,7 @@ server <- function(input, output) {
         
         countries <- ne_countries(returnclass = "sf") %>%
             clean_names()
-        biff_countries_clean <- read_rds("raw-data/biff_countries_clean.RDS") %>%
+        biff_countries_clean <- read_rds("biff_countries_clean.rds") %>%
             mutate(all = winners + nominations + submissions)
         biff_selection <- input$biff_input
         
