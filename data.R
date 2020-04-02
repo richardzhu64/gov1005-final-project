@@ -4,15 +4,15 @@ library(rvest)
 library(janitor)
 library(htmltab)
 # Read in csv files from Kaggle - Oscar winners by demographics and information about the Oscar Winners
-demographics <- read_csv("raw-data/Oscars-demographics-DFE.csv") %>%
+demographics <- read_csv("Oscars_Local/raw-data/Oscars-demographics-DFE.csv") %>%
   clean_names()
-oscars_overall <- read_csv("raw-data/the_oscar_award.csv") %>%
+oscars_overall <- read_csv("Oscars_Local/raw-data/the_oscar_award.csv") %>%
   clean_names() %>%
   select(year_ceremony, category, name, film, winner) %>%
   setNames(c("year", "category", "name", "film", "winner"))
 
 # cleaned IMDB data - code in imdb.R
-imdb_titles_ratings <- read_csv("raw-data/imdb_titles_ratings.csv") %>%
+imdb_titles_ratings <- read_csv("Oscars_Local/raw-data/imdb_titles_ratings.csv") %>%
   clean_names()
 
 # Cannes and BAFTA information
@@ -101,19 +101,7 @@ biff_titles <- biff_titles %>%
   mutate(row_num = 1:nrow(biff_titles)) %>%
   mutate(win = (row_num %% 5 == 1)) %>%
   select(-row_num)
-# IMDB Title Basics - how to get years, ratings, number of votes
 
-clean_imdb_titles <- imdb_titles %>%
-  filter(titleType == "movie") %>%
-  select(tconst, primaryTitle, originalTitle, startYear, runtimeMinutes) %>%
-  rename(year = startYear) %>%
-  clean_names()
-
-clean_imdb_ratings <- imdb_ratings %>%
-  clean_names()
-
-clean_imdb <- clean_imdb_titles %>%
-  left_join(clean_imdb_ratings, by="tconst")
 
 
 # list of countries with spaces
@@ -158,6 +146,8 @@ bafta_year_win <- bafta %>%
   select(-first_2, -row_num) %>%
   mutate(country = strsplit(country, "\n"))
 
+saveRDS(bafta_year_win, file="bafta_year_win.rds")
+
 
 # helper function to split strings with spaces 
 space_string <- function(s) {
@@ -168,6 +158,7 @@ palme_dor_year_win <- palme_dor %>%
   mutate(country = strsplit(country, " ")) %>%
   mutate(film = space_string(film))
 
+saveRDS(palme_dor_year_win, file="palme_dor_year_win.rds")
 
 # BIFF DATA CLEANING - taking away the brackets, separating the new countries
 # list into a list of Countries
@@ -180,6 +171,10 @@ remove_brackets <- function(s) {
 biff_countries_clean <- biff_countries %>%
   mutate(country = str_replace(country, "\\[\\w\\]", ""))
 
+saveRDS(biff_countries_clean, file="biff_countries_clean.rds")
+
 biff_year_clean <- biff_year %>%
   mutate(first_time = strsplit(first_time, ", "))
+
+saveRDS(biff_year_clean, file="biff_year_clean.rds")
 
