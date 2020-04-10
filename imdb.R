@@ -5,9 +5,8 @@ library(rvest)
 library(janitor)
 
 # IMDb stuff
-imdb_titles <- read_tsv("raw-data/title.basics.tsv")
-imdb_ratings <- read_tsv("raw-data/title.ratings.tsv")
-imdb_crew <- read_tsv("raw-data/title.crew.tsv")
+imdb_titles <- read_tsv("Oscars_Local/title.basics (1).tsv")
+imdb_ratings <- read_tsv("Oscars_Local/title.ratings (1).tsv")
 
 imdb_titles_ratings <- imdb_titles %>%
   left_join(imdb_ratings, by="tconst")
@@ -24,4 +23,9 @@ imdb_titles_filtered <- imdb_titles %>%
   select(tconst, primaryTitle, originalTitle, startYear, runtimeMinutes) %>%
   clean_names()
 
+imdb_titles_ratings <- imdb_titles_filtered %>%
+  left_join(imdb_ratings, by="tconst") %>%
+  clean_names()
+
 title_codes <- imdb_titles_filtered %>% pull(tconst)
+saveRDS(imdb_titles_ratings, file="Oscars_Local/imdb_titles_ratings.rds")
