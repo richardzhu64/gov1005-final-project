@@ -14,9 +14,20 @@ library(rnaturalearth)
 library(rnaturalearthdata)
 library(rgeos)
 library(janitor)
+library(purrr)
+library(shinythemes)
+library(broom)
+library(gt)
+library(scales)
+library(vembedr)
+
+biff_titles <- readRDS("biff_titles.rds")
+bafta_year_win <-  readRDS("bafta_year_win.rds")
+palme_dor_year_win <- readRDS("palme_dor_year_win.rds")
+
 
 # Define UI for application that draws a histogram
-ui <- navbarPage("Oscars So Local?: Film Awards by Country and Demographics",
+ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards by Country and Demographics",
     tabPanel("Home",
              h2("Welcome!", align = "center"),
              h4("International or Local Films?: The Oscars by Country and Demographic Over Time"),
@@ -64,8 +75,7 @@ ui <- navbarPage("Oscars So Local?: Film Awards by Country and Demographics",
                nominees historically to see the progress of representation over 
                time.")
              ),
-
-    tabPanel("Oscar Best International Film",
+    tabPanel("Oscar Best International Film ",
              sidebarLayout(
                  sidebarPanel(
                      h4("About"),
@@ -81,7 +91,59 @@ ui <- navbarPage("Oscars So Local?: Film Awards by Country and Demographics",
                  plotOutput("oscar_countries")
              )
              )),
-    tabPanel("Oscars vs. Film Awards"
+    navbarMenu("Oscars vs. Film Awards",
+        tabPanel("Animations Over Time",
+            h4("These animations show the global scale of film awards over time."),
+            mainPanel(
+                HTML('<center><img src="biff_first_time_animation.gif" width="45%"></center>'),
+                hr(),
+                fluidRow(
+                    column(5,
+                           imageOutput("biff_animation")
+                           ),
+                    column(5, offset = 1,
+                           imageOutput("biff_winners_animation")
+                           )
+                ),
+                hr(),
+                fluidRow(
+                    column(5,
+                           imageOutput("bafta_animation")
+                    ),
+                    column(5, offset = 1,
+                           imageOutput("bafta_winners_animation")
+                    )
+                ),
+                hr(),
+                HTML('<center><img src="palme_over_time_animation.gif" width="45%"></center>'),
+            )),
+        tabPanel("Interactive Graphs",
+             sidebarLayout(
+                sidebarPanel(
+                    h4("About"),
+                    p("These graphs display the Oscars Best International Feature Film
+                       winners countries over time compared to that of the Cannes Film
+                       Festival's top award (the Palme D'Or) and the British Film Academy's
+                      equivalent Foreign Film Award."),
+                    p("The year range can be adjusted on the left to filter for a
+                       certain range. Hover over each country to get the specific
+                       numbers."),
+                    sliderInput("year_range", "Year:",
+                                min = 1946, max = 2020,
+                                value = c(1946, 2020),
+                                sep = ""),
+                    radioButtons(inputId = "year_radio", 
+                                 label = "BAFTA & Oscars Films",
+                                 choices = list("All" = 1, 
+                                                "Nominated Films" = 2, 
+                                                "Winning Films" = 3), 
+                                 selected = 1)
+                ),
+             mainPanel(
+                plotOutput("oscar_over_time"),
+                plotOutput("palme_over_time"),
+                plotOutput("bafta_over_time")
+             )))
              ),
     tabPanel("Oscar Demographics"
              ),
@@ -139,6 +201,29 @@ server <- function(input, output) {
                  caption = "Source: Wikipedia/Academy of Motion Picture Arts and Sciences",
                  fill = biff_selection) +
             theme_void()
+    })
+    output$oscar_over_time <- renderPlot({
+        input_low <- input$year_range[1]
+        input_high <- input$year_range[2]
+        input_radio <- ifelse(input$year_radio == 2, FALSE, TRUE)
+                         
+        if (input_low == 1946 & input_high == 2020) {
+            
+        }
+        else {
+            biff_graph <- biff_titles %>%
+                filter(input$year_radio == 1 | win == input_radio) %>%
+                filter(year >= input_low & year <= input_high) %>%
+                group_by(country) %>%
+                tally() %>%
+                arrange(desc(n))
+        }
+    })
+    output$bafta_over_time <- renderPlot({
+        
+    })
+    output$palme_over_time <- renderPlot({
+        
     })
 }
 
