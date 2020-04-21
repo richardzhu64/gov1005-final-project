@@ -19,7 +19,8 @@ library(shinythemes)
 library(broom)
 library(gt)
 library(scales)
-library(vembedr)
+library(animation)
+
 
 biff_titles <- readRDS("biff_titles.rds")
 bafta_year_win <-  readRDS("bafta_year_win.rds")
@@ -91,31 +92,37 @@ ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards
                  plotOutput("oscar_countries")
              )
              )),
+    tabPanel("Oscars Over Time",
+             mainPanel(
+                 imageOutput("biff_test")
+             )
+             ),
     navbarMenu("Oscars vs. Film Awards",
         tabPanel("Animations Over Time",
-            h4("These animations show the global scale of film awards over time."),
             mainPanel(
-                HTML('<center><img src="biff_first_time_animation.gif" width="45%"></center>'),
+                column(4.5, offset = 6,
+                       imageOutput("biff_first_animation")),
                 hr(),
                 fluidRow(
-                    column(5,
+                    column(4.5,
                            imageOutput("biff_animation")
                            ),
-                    column(5, offset = 1,
+                    column(4.5, offset = 6,
                            imageOutput("biff_winners_animation")
                            )
                 ),
                 hr(),
                 fluidRow(
-                    column(5,
+                    column(4.5,
                            imageOutput("bafta_animation")
                     ),
-                    column(5, offset = 1,
+                    column(4.5, offset = 6,
                            imageOutput("bafta_winners_animation")
                     )
                 ),
                 hr(),
-                HTML('<center><img src="palme_over_time_animation.gif" width="45%"></center>'),
+                column(4.5, offset=6,
+                       imageOutput("palme_animation"))
             )),
         tabPanel("Interactive Graphs",
              sidebarLayout(
@@ -202,6 +209,43 @@ server <- function(input, output) {
                  fill = biff_selection) +
             theme_void()
     })
+    output$biff_first_animation <- renderImage({
+        list(src = "biff_first_time_animation.gif",
+             contentType = 'image/gif',
+             width = 400
+        )}, deleteFile = FALSE)
+    output$biff_animation <- renderImage({
+            list(src = "biff_over_time_animation.gif",
+                 contentType = 'image/gif',
+                 width = 400
+            )
+    }, deleteFile = FALSE)
+    
+    output$biff_winners_animation <- renderImage({
+        list(src = "biff_winners_over_time_animation.gif",
+             contentType = 'image/gif',
+             width = 400
+        )
+    }, deleteFile = FALSE)
+    output$bafta_animation <- renderImage({
+        list(src = "bafta_over_time_animation.gif", 
+             width = 400
+        )
+    }, deleteFile = FALSE)
+    
+    output$bafta_winners_animation <- renderImage({
+        list(src = "bafta_winners_over_time_animation.gif",
+             contentType = 'image/gif',
+             width = 400
+        )
+    }, deleteFile = FALSE)
+    output$palme_animation <- renderImage({
+        list(src = "palme_over_time_animation.gif",
+             contentType = 'image/gif',
+             width = 400
+             
+        )
+    }, deleteFile = FALSE)
     output$oscar_over_time <- renderPlot({
         input_low <- input$year_range[1]
         input_high <- input$year_range[2]
