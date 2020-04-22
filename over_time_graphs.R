@@ -223,12 +223,12 @@ bafta_winners_over_time_animation <- ggplot(bafta_winners_sf) +
   geom_sf(aes(fill = n)) +
   scale_fill_viridis_c(option = "plasma",
                        direction = -1) +
-  labs(title = "British Academy (BAFTA) Best Foreign Language Film by Country Over Time",
+  labs(title = "British Academy (BAFTA) Winners by Country Over Time",
        caption = "Source: British Academy Film Awards",
-       fill = "Nominations",
+       fill = "Winners",
        subtitle = "Year: {frame_time}") +
   theme_void() +
   transition_time(year)
 slower_bafta_winners <- animate(bafta_winners_over_time_animation, nframes = 38,
                                 duration = 10)
-anim_save("bafta_winners_over_time_animation.gif", slower_bafta_winners)
+anim_save("Oscars_Local/bafta_winners_over_time_animation.gif", slower_bafta_winners)

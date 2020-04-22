@@ -99,31 +99,10 @@ ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards
              ),
     navbarMenu("Oscars vs. Film Awards",
         tabPanel("Animations Over Time",
-            mainPanel(
-                column(4.5, offset = 6,
-                       imageOutput("biff_first_animation")),
-                hr(),
-                fluidRow(
-                    column(4.5,
-                           imageOutput("biff_animation")
-                           ),
-                    column(4.5, offset = 6,
-                           imageOutput("biff_winners_animation")
-                           )
-                ),
-                hr(),
-                fluidRow(
-                    column(4.5,
-                           imageOutput("bafta_animation")
-                    ),
-                    column(4.5, offset = 6,
-                           imageOutput("bafta_winners_animation")
-                    )
-                ),
-                hr(),
-                column(4.5, offset=6,
-                       imageOutput("palme_animation"))
-            )),
+                h2("Animations Over Time"),
+                h4("This page displays animations of various awards over time."),
+                includeHTML('graph_animations.html')
+            ),
         tabPanel("Interactive Graphs",
              sidebarLayout(
                 sidebarPanel(
