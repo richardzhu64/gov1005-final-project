@@ -101,7 +101,7 @@ ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards
         tabPanel("Animations Over Time",
                 h2("Animations Over Time"),
                 h4("This page displays animations of various awards over time."),
-                includeHTML('graph_animations.html')
+                HTML(readLines("graph_animations.html"))
             ),
         tabPanel("Interactive Graphs",
              sidebarLayout(
