@@ -1,11 +1,4 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
+
 
 library(shiny)
 library(tidyverse)
@@ -14,18 +7,15 @@ library(rnaturalearth)
 library(rnaturalearthdata)
 library(rgeos)
 library(janitor)
-library(purrr)
 library(shinythemes)
 library(broom)
-library(gt)
 library(scales)
-library(animation)
-
+library(plotly)
 
 biff_titles <- readRDS("biff_titles.rds")
 bafta_year_win <-  readRDS("bafta_year_win.rds")
 palme_dor_year_win <- readRDS("palme_dor_year_win.rds")
-
+oscar_demographics <- readRDS("csv_demographics.rds")
 
 # Define UI for application that draws a histogram
 ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards by Country and Demographics",
@@ -76,7 +66,7 @@ ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards
                nominees historically to see the progress of representation over 
                time.")
              ),
-    tabPanel("Oscar Best International Film ",
+    tabPanel("Oscar Best International Film",
              sidebarLayout(
                  sidebarPanel(
                      h4("About"),
@@ -92,18 +82,12 @@ ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards
                  plotOutput("oscar_countries")
              )
              )),
-    tabPanel("Oscars Over Time",
-             mainPanel(
-                 imageOutput("biff_test")
-             )
-             ),
-    navbarMenu("Oscars vs. Film Awards",
-        tabPanel("Animations Over Time",
-                h2("Animations Over Time"),
-                h4("This page displays animations of various awards over time."),
-                HTML(readLines("graph_animations.html"))
-            ),
-        tabPanel("Interactive Graphs",
+    tabPanel("Animations Over Time",
+             h2("Animations Over Time"),
+             h4("This page displays animations of various awards over time."),
+             HTML(readLines("graph_animations.html"))
+    ),
+    tabPanel("Oscars vs. Film Awards",
              sidebarLayout(
                 sidebarPanel(
                     h4("About"),
@@ -127,14 +111,36 @@ ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards
                 ),
              mainPanel(
                 plotOutput("oscar_over_time"),
-                plotOutput("palme_over_time"),
-                plotOutput("bafta_over_time")
-             )))
+                plotOutput("bafta_over_time"),
+                plotOutput("palme_over_time")
+             ))
              ),
-    tabPanel("Oscar Demographics"
+    tabPanel("Oscar Demographics",
+             sidebarLayout(
+                 sidebarPanel(
+                     h4("About"),
+                     p("These graphs display the demographics across race, gender,
+                     religion, and sexual orientation over time."),
+                     p("The year range can be adjusted on the left to filter for a
+                       certain range."),
+                     sliderInput("demo_range", "Year:",
+                                 min = 1930, max = 2014,
+                                 value = c(1930, 2014),
+                                 sep = "")
+                 ),
+                 mainPanel(
+                     plotOutput("race_over_time"),
+                     plotOutput("gender_over_time"),
+                     plotOutput("religion_over_time"),
+                     plotOutput("sexual_orientation_over_time")
+                 ))
              ),
-    tabPanel("Data Analysis"
-             ),
+    navbarMenu("Models and Analysis",
+        tabPanel("Gender",
+            HTML(readLines("gender.html"))
+        ),
+        tabPanel("Geography + Popularity"
+        )),
     tabPanel("About",
              h2("Contact"),
              
@@ -188,65 +194,94 @@ server <- function(input, output) {
                  fill = biff_selection) +
             theme_void()
     })
-    output$biff_first_animation <- renderImage({
-        list(src = "biff_first_time_animation.gif",
-             contentType = 'image/gif',
-             width = 400
-        )}, deleteFile = FALSE)
-    output$biff_animation <- renderImage({
-            list(src = "biff_over_time_animation.gif",
-                 contentType = 'image/gif',
-                 width = 400
-            )
-    }, deleteFile = FALSE)
-    
-    output$biff_winners_animation <- renderImage({
-        list(src = "biff_winners_over_time_animation.gif",
-             contentType = 'image/gif',
-             width = 400
-        )
-    }, deleteFile = FALSE)
-    output$bafta_animation <- renderImage({
-        list(src = "bafta_over_time_animation.gif", 
-             width = 400
-        )
-    }, deleteFile = FALSE)
-    
-    output$bafta_winners_animation <- renderImage({
-        list(src = "bafta_winners_over_time_animation.gif",
-             contentType = 'image/gif',
-             width = 400
-        )
-    }, deleteFile = FALSE)
-    output$palme_animation <- renderImage({
-        list(src = "palme_over_time_animation.gif",
-             contentType = 'image/gif',
-             width = 400
-             
-        )
-    }, deleteFile = FALSE)
     output$oscar_over_time <- renderPlot({
         input_low <- input$year_range[1]
         input_high <- input$year_range[2]
         input_radio <- ifelse(input$year_radio == 2, FALSE, TRUE)
-                         
-        if (input_low == 1946 & input_high == 2020) {
-            
-        }
-        else {
-            biff_graph <- biff_titles %>%
-                filter(input$year_radio == 1 | win == input_radio) %>%
-                filter(year >= input_low & year <= input_high) %>%
-                group_by(country) %>%
-                tally() %>%
-                arrange(desc(n))
-        }
+        input_name <- case_when(
+            input$year_radio == 1 ~ "All",
+            input$year_radio == 2 ~ "Nominations",
+            input$year_radio == 3 ~ "Winners"
+        )
+        
+        biff_graph_data <- biff_titles %>%
+            filter(input$year_radio == 1 | win == input_radio) %>%
+            filter(year >= input_low & year <= input_high) %>%
+            group_by(country) %>%
+            tally() %>%
+            arrange(desc(n)) %>%
+            left_join(countries, by=c("country"="name")) %>%
+            st_as_sf(sf_column_name = "geometry")
+        
+         biff_graph <- biff_graph_data %>%
+            ggplot(text = label) + 
+            geom_sf(data = countries) + 
+            geom_sf(aes(fill = n)) +
+            scale_fill_viridis_c(option = "plasma",
+                                 direction = -1) +
+            labs(title = "Oscars Best International Film by Country Over Time",
+                 caption = "Source: Wikipedia/Academy of Motion Picture Arts and Sciences",
+                 fill = paste("BIFF",input_name),
+                 subtitle = paste("From", input_low, "to", input_high))
+         biff_graph
     })
     output$bafta_over_time <- renderPlot({
+        input_low <- input$year_range[1]
+        input_high <- input$year_range[2]
+        input_radio <- ifelse(input$year_radio == 2, FALSE, TRUE)
+        input_name <- case_when(
+            input$year_radio == 1 ~ "All",
+            input$year_radio == 2 ~ "Nominations",
+            input$year_radio == 3 ~ "Winners"
+        )
         
+        bafta_graph_data <- bafta_year_win %>%
+            unnest(country) %>%
+            mutate(country = country %>% reverse_countries()) %>%
+            filter(input$year_radio == 1 | win == input_radio) %>%
+            filter(year >= input_low & year <= input_high) %>%
+            group_by(country) %>%
+            tally() %>%
+            arrange(desc(n)) %>%
+            left_join(countries, by=c("country"="name")) %>%
+            st_as_sf(sf_column_name = "geometry")
+        
+        bafta_graph <- bafta_graph_data %>%
+            ggplot(text = label) + 
+            geom_sf(data = countries) + 
+            geom_sf(aes(fill = n)) +
+            scale_fill_viridis_c(option = "plasma",
+                                 direction = -1) +
+            labs(title = "BAFTA Best Foreign Film by Country Over Time",
+                 caption = "Source: Wikipedia/BAFTA",
+                 fill = paste("BAFTA",input_name),
+                 subtitle = paste("From", input_low, "to", input_high))
+        bafta_graph
     })
     output$palme_over_time <- renderPlot({
+        input_low <- input$year_range[1]
+        input_high <- input$year_range[2]
+        palme_graph_data <- palme_dor_year_win %>%
+            unnest(country) %>%
+            mutate(country = country %>% reverse_countries()) %>%
+            filter(year >= input_low & year <= input_high) %>%
+            group_by(country) %>%
+            tally() %>%
+            arrange(desc(n)) %>%
+            left_join(countries, by=c("country"="name")) %>%
+            st_as_sf(sf_column_name = "geometry")
         
+        palme_graph <- palme_graph_data %>%
+            ggplot(text = label) + 
+            geom_sf(data = countries) + 
+            geom_sf(aes(fill = n)) +
+            scale_fill_viridis_c(option = "plasma",
+                                 direction = -1) +
+            labs(title = "Cannes Film Festival Palme D'Or Country Over Time",
+                 caption = "Source: Wikipedia/Cannes Film Festival",
+                 fill = "Palme D'Or Winners",
+                 subtitle = paste("From", input_low, "to", input_high))
+        palme_graph
     })
 }
 

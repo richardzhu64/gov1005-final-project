@@ -98,7 +98,8 @@ unnest_baftas_country <- baftas %>%
   mutate(continent = map(country, ~ countrycode(sourcevar = ., 
                                               origin = "country.name",
                                               destination = "continent"))) %>%
-  mutate(continent = as.character(continent))
+  mutate(continent = as.character(continent)) %>%
+  distinct(film, year, continent, .keep_all = TRUE)
 
 unnest_oscars_country <- oscars %>%
   mutate(continent = map(country, ~ countrycode(sourcevar = ., 
@@ -106,9 +107,18 @@ unnest_oscars_country <- oscars %>%
                                                 destination = "continent"))) %>%
   mutate(continent = as.character(continent)) %>%
   mutate(continent = ifelse(is.na(continent), "Europe", continent))
+  
+
+oscars_continent <- unnest_oscars_country %>%
+distinct(film, year, continent, .keep_all = TRUE)
+baftas_continent <- unnest_baftas_country %>%
+  distinct(film, year, continent, .keep_all = TRUE)
+palme_continent <- unnest_oscars
+
+
 
 oscars_continent_data <- tibble(yr = 1960:2019) %>%
-  mutate(country_total = map(yr, ~ filter(unnest_oscars_country, year <= .) %>%
+  mutate(country_total = map(yr, ~ filter(oscars_continent, year <= .) %>%
                                group_by(continent) %>% tally())) %>%
   unnest(country_total) %>%
   group_by(yr) %>%
@@ -116,7 +126,7 @@ oscars_continent_data <- tibble(yr = 1960:2019) %>%
   filter(!is.na(continent))
 
 bafta_continent_data <- tibble(yr = 1983:2020) %>%
-  mutate(country_total = map(yr, ~ filter(unnest_baftas_country, year <= .) %>%
+  mutate(country_total = map(yr, ~ filter(baftas_continent, year <= .) %>%
                                group_by(continent) %>% tally())) %>%
   unnest(country_total) %>%
   group_by(yr) %>%
@@ -124,7 +134,7 @@ bafta_continent_data <- tibble(yr = 1983:2020) %>%
   filter(!is.na(continent))
 
 palme_continent_data <- tibble(yr = 1946:2019) %>%
-  mutate(country_total = map(yr, ~ filter(unnest_palme_country, year <= .) %>%
+  mutate(country_total = map(yr, ~ filter(palme_continent, year <= .) %>%
                                group_by(continent) %>% tally())) %>%
   unnest(country_total) %>%
   group_by(yr) %>%
@@ -171,16 +181,17 @@ oscars_continent_graph
 
 # OSCARS COMPARED TO OTHERS MODELS
 
-bafta_continent_model <- unnest_baftas_country %>%
-  glm(win ~ continent, data = ., family = "binomial") %>%
+bafta_continent_model <- baftas_continent %>%
+  mutate(continent = as.factor(continent)) %>%
+  glm(win ~ 0 + continent, data = ., family = "binomial") %>%
   tidy(conf.int = TRUE) %>%
   select(term, estimate, conf.low, conf.high) %>%
   mutate(estimate = plogis(estimate) %>% round(3),
          conf.low = plogis(conf.low) %>% round(3),
          conf.high = plogis(conf.high) %>% round(3))
 
-oscars_continent_model <- unnest_oscars_country %>%
-  glm(win ~ continent, data = ., family = "binomial") %>%
+oscars_continent_model <- oscars_continent %>%
+  glm(win ~ continent + 0, data = ., family = "binomial") %>%
   tidy(conf.int = TRUE) %>%
   select(term, estimate, conf.low, conf.high) %>%
   mutate(estimate = plogis(estimate) %>% round(3),

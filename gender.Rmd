@@ -1,0 +1,173 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(rvest)
+library(janitor)
+library(gender)
+library(broom)
+library(countrycode)
+library(patchwork)
+library(gt)
+```
+```{r Data Processing}
+gendered_awards <- c("ACTOR", "SUPPORTING ACTOR", "ACTRESS", "SUPPORTING ACTRESS")
+
+oscar_gender_age <- readRDS("Oscars_Local/oscar_gender_age.rds")
+oscar_no_gendered <- oscar_gender_age %>%
+  filter(!(category %in% gendered_awards))
+
+oscar_recent <- oscar_no_gendered %>%
+  filter(year >= 2000)
+
+oscar_winners_dems <- oscar_gender_age %>%
+  filter(winner)
+
+oscar_gender_data <- oscar_gender_age %>%
+  filter(!is.na(gender)) %>%
+  group_by(year, gender) %>%
+  summarize(n = n()) %>%
+  mutate(frequency = 100 * n / sum(n))
+
+oscar_gender_graph <- ggplot(oscar_gender_data, aes(x = year, y = frequency, color = gender)) +
+  geom_line() +
+  scale_color_manual(values = c("pink", "blue")) +
+  theme_classic() +
+  labs(title = "Oscar Nominees by Gender",
+       subtitle = "All Categories",
+       x = "Year",
+       y = "Proportion (in Percent)",
+       color = "Gender",
+       caption = "Source: AMPAS") +
+  theme(
+    plot.title = element_text(size = 12),
+    plot.subtitle = element_text(size = 8)
+  )
+
+oscar_no_gender_data <- oscar_no_gendered %>%
+  filter(!is.na(gender)) %>%
+  group_by(year, gender) %>%
+  summarize(n = n()) %>%
+  mutate(frequency = 100 * n / sum(n))
+
+oscar_no_gender_graph <- ggplot(oscar_no_gender_data, aes(x = year, y = frequency, color = gender)) +
+  geom_line() +
+  scale_color_manual(values = c("pink", "blue")) +
+  theme_classic() +
+  labs(title = "Oscar Nominees by Gender",
+       subtitle = "Non-Gendered Categories (Excluding Actor & Actress)",
+       x = "Year",
+       y = "Proportion (in Percent)",
+       color = "Gender",
+       caption = "Source: AMPAS") +
+  theme(
+    plot.title = element_text(size = 12),
+    plot.subtitle = element_text(size = 8)
+  )
+
+no_gendered_model <- oscar_no_gendered %>%
+  lm(winner ~ 0 + gender + (gender * year), data = .) %>%
+  tidy(conf.int = TRUE) %>%
+  select(term, estimate, conf.low, conf.high) %>%
+  mutate(estimate = estimate %>% round(3),
+         conf.low = conf.low %>% round(3),
+         conf.high = conf.high %>% round(3)) %>%
+  mutate(ci = paste("(",conf.low,", ",conf.high,")", sep = "")) %>%
+  select(-conf.low, -conf.high)
+
+gender_model <- oscar_gender_age %>%
+  lm(winner ~ 0 + gender + (gender * year), data = .) %>%
+  tidy(conf.int = TRUE) %>%
+  select(term, estimate, conf.low, conf.high) %>%
+  mutate(estimate = estimate %>% round(3),
+         conf.low = conf.low %>% round(3),
+         conf.high = conf.high %>% round(3)) %>%
+  mutate(ci = paste("(",conf.low,", ",conf.high,")", sep = "")) %>%
+  select(-conf.low, -conf.high)
+
+recent_model <- oscar_recent %>%
+  lm(winner ~ 0 + gender + (gender * year), data = .) %>%
+  tidy(conf.int = TRUE) %>%
+  select(term, estimate, conf.low, conf.high) %>%
+  mutate(estimate = estimate %>% round(3),
+         conf.low = conf.low %>% round(3),
+         conf.high = conf.high %>% round(3)) %>%
+  mutate(ci = paste("(",conf.low,", ",conf.high,")", sep = "")) %>%
+  select(-conf.low, -conf.high)
+
+
+models_joined <- gender_model %>%
+  full_join(no_gendered_model, by="term") %>%
+  full_join(recent_model, by = "term")
+```
+## Oscars by Gender
+Here, I investigate the relationship between gender and year on Oscars results over time. The data is taken from the AMPAS, from 1928-2020.
+
+## Model
+Visually, the graphs below demonstrate the gendered nature of the Oscars over time. Women continue to be under-represented in the Academy's nominations, even into the 21st century, especially in non-gendered awards such as director, cinematography, and screenplays.
+
+```{r Graphs}
+oscar_gender_graph + oscar_no_gender_graph
+```
+
+
+Using the Oscars Awards dataset from Kaggle, I assigned gender to names using a R package called "gender" - this package assigns names to genders probabilistically using previous Social Security data. **It is critical to note that this method is not necessarily accurate for each nominated individual, but gives a good idea of the holistic relationship between gender and the Oscars results**. 
+
+From there, my research question was whether or not gendered bias in the Oscars results changed over time - put simply, do women do better as time goes on? I wanted to investigate models of three different subsets of the data. First, all categories; second, excluding categories reserved for genders (Actor, Supporting Actor, Actress, Supporting Actress); and recent results in the 21st century.
+
+To look at this relationship, I ran a linear regression model with win as the dependent variable (whether or not the nominee won) and dependent variables gender and year, allowing for interaction. More formally, my lm regression formula was `winner ~ 0 + gender * year`.
+
+### Model Results and Discussion
+```{r gt table}
+all_table <- models_joined %>%
+  gt() %>%
+  tab_header(title = "Models Demonstrating Relationship between Gender and Oscar Results Over Time",
+             subtitle = "Models with All Categories, Non-Gendered Categories, Recent Results Only") %>%
+  tab_spanner(
+    label = "All Categories",
+    columns = vars(estimate.x, ci.x)
+  ) %>%
+  tab_spanner(
+    label = "Non-Gendered Categories (No Acting)",
+    columns = vars(estimate.y, ci.y)
+  ) %>%
+  tab_spanner(
+    label = "Recent Oscars (2000-2020)",
+    columns = vars(estimate, ci)
+  ) %>%
+  cols_label(
+    term = "Variable",
+    estimate.x = "Estimate",
+    ci.x = "95% CI",
+    estimate.y = "Estimate",
+    ci.y = "95% CI",
+    estimate = "Estimate",
+    ci = "95% CI",
+    ) %>%
+  cols_align(
+    align="center"
+  ) %>%
+  fmt_passthrough(
+    columns = vars(term, estimate.x, ci.x, estimate.y, ci.y, estimate, ci)
+  )
+all_table
+```
+The results of each model are displayed above. As can be seen, the genderfemale coefficient is negative for all 3 models. This indicates that female nominees are negatively associated with winning the Oscar, while males typically are positively associated with winning. Interestingly, the gendermale coefficient for the Non-Gendered categories is also negative - in this case, we hypothesize that the larger year coefficient plays a role in making both coefficients negative.
+
+Critically, we see that the difference in estimated coefficients between gendermale and genderfemale becomes more pronounced when we eliminate gendered categories. This could potentially imply that in critical categories such as directing, cinematography, and writing in which individuals of all genders must compete, female nominees are underrepresented among the winners relative to male nominees. This evidence would seem to support recent calls for larger gender diversity in Hollywood, and specifically among the Academy's elite of winners.
+
+Next, we look at the interaction variable. As can be seen, the gendermale:year variable is negative for all 3 models - this implies that the over-representation of males among winners decreases with time. However, the magnitude of this coefficient is extremely minute (below .02) for all three cases, indicating that this progress has been minimal.
+
+**However, the confidence intervals of many of the coefficients include 0**. This implies that these coefficients are not statistically significant at the 95% confidence level - fundamentally, it would be difficult to say definitively that these relationships exist due to small sample sizes, or the fact that most nominees (by definition) lose regardless of the year or their demographics. However, looking at these regressions nonetheless provides information and insights into the quantitative backing of these calls for diversity. 
+
+All in all, our model supports the following two ideas:
+
+**1) Women are underrepresented both in nominations and winners at the Oscars relative to men**.
+
+**2) Over time, this relationship between a nominee's gender and winning the Oscar has become slightly more level** - that is, the under-representation of women among winners has become slightly lower over time, especially in the 21st century. **However, the gap between men and women among Oscar winners and nominees remains extremely significant and requires addressal**.
+
+
+
