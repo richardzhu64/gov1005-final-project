@@ -11,6 +11,7 @@ library(shinythemes)
 library(broom)
 library(scales)
 library(plotly)
+library(patchwork)
 
 biff_titles <- readRDS("biff_titles.rds")
 bafta_year_win <-  readRDS("bafta_year_win.rds")
@@ -96,8 +97,7 @@ ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards
                        Festival's top award (the Palme D'Or) and the British Film Academy's
                       equivalent Foreign Film Award."),
                     p("The year range can be adjusted on the left to filter for a
-                       certain range. Hover over each country to get the specific
-                       numbers."),
+                       certain range."),
                     sliderInput("year_range", "Year:",
                                 min = 1946, max = 2020,
                                 value = c(1946, 2020),
@@ -119,7 +119,7 @@ ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards
              sidebarLayout(
                  sidebarPanel(
                      h4("About"),
-                     p("These graphs display the demographics across race, gender,
+                     p("These graphs display the demographics across race,
                      religion, and sexual orientation over time."),
                      p("The year range can be adjusted on the left to filter for a
                        certain range."),
@@ -129,18 +129,12 @@ ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards
                                  sep = "")
                  ),
                  mainPanel(
-                     plotOutput("race_over_time"),
-                     plotOutput("gender_over_time"),
-                     plotOutput("religion_over_time"),
-                     plotOutput("sexual_orientation_over_time")
+                     plotOutput("demographics_over_time")
                  ))
              ),
-    navbarMenu("Models and Analysis",
-        tabPanel("Gender",
-            HTML(readLines("gender.html"))
+    tabPanel("Models and Analysis",
+        HTML(readLines("gender.html"))
         ),
-        tabPanel("Geography + Popularity"
-        )),
     tabPanel("About",
              h2("Contact"),
              
@@ -282,6 +276,60 @@ server <- function(input, output) {
                  fill = "Palme D'Or Winners",
                  subtitle = paste("From", input_low, "to", input_high))
         palme_graph
+    })
+    output$demographics_over_time <- renderPlot({
+        input_low <- input$demo_range[1]
+        input_high <- input$demo_range[2]
+        graph_data <- oscar_demographics %>%
+            filter(year_of_award >= input_low & year_of_award <= input_high) %>%
+            select(person, movie, year_of_award, sexual_orientation, religion,
+                   race_ethnicity) %>%
+            mutate(race_ethnicity = as.character(race_ethnicity),
+                   sexual_orientation = as.character(sexual_orientation),
+                   religion = as.character(religion))
+        orientation_graph <- graph_data %>%
+            filter(!is.na(sexual_orientation)) %>%
+            mutate(religion = ifelse(sexual_orientation == "Na", "NA",
+                                     sexual_orientation)) %>%
+            group_by(sexual_orientation) %>%
+            tally() %>%
+            ggplot(aes(x = reorder(x = sexual_orientation, n), y = n)) +
+            geom_bar(stat = "identity", fill = "lightblue") +
+            coord_flip() +
+            theme_classic() +
+            labs(title = "Oscar Winners by \n Sexual Orientation",
+                 subtitle = paste("From",input_low, "to", input_high),
+                 y = "Sexual Orientation",
+                 x = "Count"
+            )
+        race_graph <- graph_data %>%
+            filter(!is.na(race_ethnicity)) %>%
+            group_by(race_ethnicity) %>%
+            tally() %>%
+            ggplot(aes(x = reorder(race_ethnicity, n), y = n)) +
+            geom_bar(stat = "identity", fill = "darkgreen") +
+            coord_flip() +
+            theme_classic() +
+            labs(title = "Oscar Winners by \n Race/Ethnicity",
+                     subtitle = paste("From",input_low, "to", input_high),
+                     y = "",
+                     x = "Count"
+            )
+        religion_graph <- graph_data %>%
+                filter(!is.na(religion)) %>%
+                mutate(religion = ifelse(religion == "Na", "NA", religion)) %>%
+                group_by(religion) %>%
+                tally() %>%
+                ggplot(aes(x = reorder(religion, n), y = n)) +
+                geom_bar(stat = "identity", fill = "red") +
+                coord_flip() +
+                theme_classic() +
+                labs(title = "Oscar Winners by Religion",
+                     subtitle = paste("From",input_low, "to", input_high),
+                     y = "Religion",
+                     x = "Count"
+                )
+          (race_graph | orientation_graph) / religion_graph      
     })
 }
 
