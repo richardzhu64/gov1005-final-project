@@ -1,5 +1,5 @@
 
-
+library(shinythemes)
 library(shiny)
 library(tidyverse)
 library(sf)
@@ -7,22 +7,34 @@ library(rnaturalearth)
 library(rnaturalearthdata)
 library(rgeos)
 library(janitor)
-library(shinythemes)
 library(broom)
 library(scales)
-library(plotly)
 library(patchwork)
+library(animation)
 
 biff_titles <- readRDS("biff_titles.rds")
 bafta_year_win <-  readRDS("bafta_year_win.rds")
 palme_dor_year_win <- readRDS("palme_dor_year_win.rds")
 oscar_demographics <- readRDS("csv_demographics.rds")
+countries <- ne_countries(returnclass = "sf") %>%
+    clean_names() %>%
+    select(name_long, geometry) %>%
+    rename(name = name_long)
+
+reverse_countries <- function(v) {
+    search <- c("UnitedStates"="United States", "UnitedKingdom"="United Kingdom",
+                "WestGermany"="Germany", "CzechRepublic" = "Czech Republic",
+                "HongKong"="Hong Kong", "SouthKorea"="South Korea",
+                "NewZealand"="New Zealand", "SovietUnion"="Russia")
+    str_replace_all(v, search)
+}
 
 # Define UI for application that draws a histogram
-ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards by Country and Demographics",
+ui <- navbarPage(theme = shinytheme("lumen"), "Oscars So Local?: Film Awards by Country and Demographics",
     tabPanel("Home",
              h2("Welcome!", align = "center"),
-             h4("International or Local Films?: The Oscars by Country and Demographic Over Time"),
+             HTML("<img src = 'https://www.rd.com/wp-content/uploads/2020/01/GettyImages-927288148.jpg' align = 'center' height = '70%' width = '100%'>"),
+             h3("Oscars So Local: Oscars Diversity Over Time"),
              
              p("In 2019, Bong Joon Ho, the South Korean director of recent Best 
                Picture winner Parasite, said in an interview that “the Oscars 
@@ -60,9 +72,8 @@ ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards
                world, and looking at these datasets allowed me to do so. 
                Finally, I wanted to look into the demographics of the Oscars' 
                nominations and winners over time. Regressing the Oscars 
-               membership with its eventual results provides interesting insights
-               into whether the representation within membership necessarily 
-               causes more diverse winners and nominees. Thus, I utilized online
+                eventual results over various factors provides interesting insights
+               into winners and nominees over time. Thus, I utilized online
                data from Kaggle to download demographic information of Oscars 
                nominees historically to see the progress of representation over 
                time.")
@@ -133,17 +144,43 @@ ui <- navbarPage(theme = shinytheme("sandstone"), "Oscars So Local?: Film Awards
                  ))
              ),
     tabPanel("Models and Analysis",
-        HTML(readLines("gender.html"))
+        tabsetPanel(
+        tabPanel("Gender",
+            includeHTML("gender.html")
+        ),
+        tabPanel("Geography",
+            includeHTML("geography.html")
+        ),
+        tabPanel("IMDb Ratings",
+            includeHTML("popularity.html")
+        ))
         ),
     tabPanel("About",
+             h2("Data"),
+             p("I took data from multiple sources. For the demographic data, I
+               used data taken from Kaggle - one containing demographic information
+               of Oscars award winners, and one with overall Oscars award nominees and
+               winners. Most of my data analysis and visualizations
+               of demographics here utilized these two datasets."),
+             
+             p("For my data comparing the various film awards, I scraped it from
+               Wikipedia's tables showing the history of these awards for ease. It's
+               important to note that the Wikipedia tables references the original sources
+               of the data, whether the AMPAS, BAFTA, or Cannes Festival."),
+             h2("Motivation"),
+             p("My motivation for this project was driven by the news regarding
+               the Oscars and my personal passion for movies. Over the years,
+               I realized that there was a stereotype that many film awards (and
+               the Academy Awards specifically) only honored a certain subset or type
+               of movies, and director Bong's comments coming up to the 2020 Oscars
+               only confirmed this impression."),
              h2("Contact"),
              
              p("Hello! My name is Richard Zhu, and I'm a sophomore in Leverett 
                 House studying Applied Math with a focus in Economics and 
                 Computer Science. This is was my final project for GOV 1005: 
-                Data. If you're interested in contacting me, my email is 
-                richardzhu@college.harvard.edu")
-             
+                Data. If you're interested in contacting me, my email is richardzhu@college.harvard.edu"),
+             p("The source code for this app can be found", a(href = 'https://github.com/richardzhu64/gov1005-final-project', 'here.'))
              ))
 
 server <- function(input, output) {
@@ -289,7 +326,7 @@ server <- function(input, output) {
                    religion = as.character(religion))
         orientation_graph <- graph_data %>%
             filter(!is.na(sexual_orientation)) %>%
-            mutate(religion = ifelse(sexual_orientation == "Na", "NA",
+            mutate(sexual_orientation = ifelse(sexual_orientation == "Na", "NA",
                                      sexual_orientation)) %>%
             group_by(sexual_orientation) %>%
             tally() %>%
@@ -329,7 +366,8 @@ server <- function(input, output) {
                      y = "Religion",
                      x = "Count"
                 )
-          (race_graph | orientation_graph) / religion_graph      
+          (race_graph | orientation_graph) / religion_graph +
+            plot_layout(height = c(1, 2))
     })
 }
 

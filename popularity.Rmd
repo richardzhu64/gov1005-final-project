@@ -1,0 +1,134 @@
+---
+title: ""
+output: html_document
+---   
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(rvest)
+library(janitor)
+library(gender)
+library(broom)
+library(countrycode)
+library(patchwork)
+library(gt)
+```
+
+```{r Data Processing}
+palme_dor <- readRDS("Oscars_Local/palme_dor_year_win.rds")
+oscars <- readRDS("Oscars_Local/biff_titles.rds")
+baftas <- readRDS("Oscars_Local/bafta_year_win.rds")
+
+bafta_popularity_model <- baftas %>%
+  filter(!is.na(rating)) %>%
+  lm(win ~ 0 + rating + votes + runtime, data = .) %>%
+  tidy(conf.int = TRUE) %>%
+  select(term, estimate, conf.low, conf.high) %>%
+  mutate(estimate = estimate %>% round(3),
+         conf.low = conf.low %>% round(3),
+         conf.high = conf.high %>% round(3)) %>%
+  mutate(ci = paste("(",conf.low,", ",conf.high,")", sep = "")) %>%
+  select(-conf.low, -conf.high)
+
+
+oscars_popularity_model <- oscars %>%
+  filter(!is.na(rating)) %>%
+  lm(win ~ 0 + rating + votes + runtime, data = .) %>%
+  tidy(conf.int = TRUE) %>%
+  select(term, estimate, conf.low, conf.high) %>%
+  mutate(estimate = estimate %>% round(3),
+         conf.low = conf.low %>% round(3),
+         conf.high = conf.high %>% round(3)) %>%
+  mutate(ci = paste("(",conf.low,", ",conf.high,")", sep = "")) %>%
+  select(-conf.low, -conf.high)
+
+palme_popularity <- palme_dor %>%
+  filter(!is.na(rating)) %>%
+  summarize(runtime_avg = mean(runtime) %>% round(),
+            rating_avg = mean(rating) %>% round(1),
+            votes_avg = mean(votes) %>% round()) %>%
+  mutate(award = "Palme D'Or")
+
+bafta_popularity <- baftas %>%
+  filter(!is.na(rating)) %>%
+  summarize(runtime_avg = mean(runtime) %>% round(),
+            rating_avg = mean(rating) %>% round(1),
+            votes_avg = mean(votes) %>% round()) %>%
+  mutate(award = "BAFTAs")
+
+oscars_popularity <- oscars %>%
+  filter(!is.na(rating)) %>%
+  summarize(runtime_avg = mean(runtime) %>% round(),
+            rating_avg = mean(rating) %>% round(1),
+            votes_avg = mean(votes) %>% round()) %>%
+  mutate(award = "Oscars")
+
+all_awards <- oscars_popularity %>%
+  rbind(bafta_popularity) %>%
+  rbind(palme_popularity) %>%
+  select(award, rating_avg, votes_avg, runtime_avg)
+
+models <- oscars_popularity_model %>%
+  full_join(bafta_popularity_model, by = "term")
+```
+
+## Popularity
+
+Finally, I thought it would be fun to look at the runtimes and popularity of the Oscars, BAFTAs, and Cannes film award nominees and winners. To do this, I used the IMDb database on movie ratings and joined them with the movies on the list. It\'s important to note that many movies were not matched with any movies in the IMDb database, so some films are not included in these calculations.
+
+```{r Table}
+all_awards %>%
+  gt() %>%
+tab_header(title = "Popularity by Film Award",
+             subtitle = "Data from IMDb Database") %>%
+  cols_label(
+    award = "Award",
+    runtime_avg = "Average Runtime",
+    rating_avg = "Average Rating",
+    votes_avg = "Average # of Votes"
+    ) %>%
+  cols_align(
+    align="center"
+  ) %>%
+  fmt_passthrough(
+    columns = vars(award, runtime_avg, rating_avg, votes_avg)
+  )
+```
+
+## Model
+I ran a linear regression of Oscars and BAFTAs wins on the film\'s IMDb runtime, average rating, and number of votes from IMDb users.
+
+### Results and Discussion
+```{r Models}
+models_table <- models %>%
+  gt() %>%
+tab_header(title = "Relationship between IMDb Ratings and Film Awards",
+             subtitle = "Oscars & BAFTAs") %>%
+  tab_spanner(
+    label = "Oscars BIFF",
+    columns = vars(estimate.x, ci.x)
+  ) %>%
+  tab_spanner(
+    label = "BAFTAs BFF",
+    columns = vars(estimate.y, ci.y)
+  ) %>%
+  cols_label(
+    term = "Variable",
+    estimate.x = "Estimate",
+    ci.x = "95% CI",
+    estimate.y = "Estimate",
+    ci.y = "95% CI",
+    ) %>%
+  cols_align(
+    align="center"
+  ) %>%
+  fmt_passthrough(
+    columns = vars(term, estimate.x, ci.x, estimate.y, ci.y)
+  )
+models_table
+```
+
+
+Since our win variable is either 0 or 1, we can interpret our coefficients in terms of probabilities. Right away, the number of votes seems to have no relationship with a film\'s chance of winning - these awards don\'t care about popular quantity but more quality! However, the other effects are relatively modest (likely due to small sample size). For both award shows, a 1-point ratings increase is associated with a 1% increase in the chance of a film winning for both events, while a 1 minute increase in runtime is associated with a .1% increase in a film\'s chance of winning. However, both of these coefficients include 0 in their confidence interval, implying that these effects aren\'t very large.
+

@@ -107,7 +107,7 @@ models_joined <- gender_model %>%
 Here, I investigate the relationship between gender and year on Oscars results over time. The data is taken from the AMPAS, from 1928-2020.
 
 ## Model
-Visually, the graphs below demonstrate the gendered nature of the Oscars over time. Women continue to be under-represented in the Academy's nominations, even into the 21st century, especially in non-gendered awards such as director, cinematography, and screenplays.
+Visually, the graphs below demonstrate the gendered nature of the Oscars over time. Women continue to be under-represented in the Academy\'s nominations, even into the 21st century, especially in non-gendered awards such as director, cinematography, and screenplays.
 
 ```{r Graphs}
 oscar_gender_graph + oscar_no_gender_graph
@@ -157,7 +157,7 @@ all_table
 ```
 The results of each model are displayed above. As can be seen, the genderfemale coefficient is negative for all 3 models. This indicates that female nominees are negatively associated with winning the Oscar, while males typically are positively associated with winning. Interestingly, the gendermale coefficient for the Non-Gendered categories is also negative - in this case, we hypothesize that the larger year coefficient plays a role in making both coefficients negative.
 
-Critically, we see that the difference in estimated coefficients between gendermale and genderfemale becomes more pronounced when we eliminate gendered categories. This could potentially imply that in critical categories such as directing, cinematography, and writing in which individuals of all genders must compete, female nominees are underrepresented among the winners relative to male nominees. This evidence would seem to support recent calls for larger gender diversity in Hollywood, and specifically among the Academy's elite of winners.
+Critically, we see that the difference in estimated coefficients between gendermale and genderfemale becomes more pronounced when we eliminate gendered categories. This could potentially imply that in critical categories such as directing, cinematography, and writing in which individuals of all genders must compete, female nominees are underrepresented among the winners relative to male nominees. This evidence would seem to support recent calls for larger gender diversity in Hollywood, and specifically among the Academy\'s elite of winners.
 
 Next, we look at the interaction variable. As can be seen, the gendermale:year variable is negative for all 3 models - this implies that the over-representation of males among winners decreases with time. However, the magnitude of this coefficient is extremely minute (below .02) for all three cases, indicating that this progress has been minimal.
 
@@ -167,7 +167,7 @@ All in all, our model supports the following two ideas:
 
 **1) Women are underrepresented both in nominations and winners at the Oscars relative to men**.
 
-**2) Over time, this relationship between a nominee's gender and winning the Oscar has become slightly more level** - that is, the under-representation of women among winners has become slightly lower over time, especially in the 21st century. **However, the gap between men and women among Oscar winners and nominees remains extremely significant and requires addressal**.
+**2) Over time, this relationship between a nominee\'s gender and winning the Oscar has become slightly more level** - that is, the under-representation of women among winners has become slightly lower over time, especially in the 21st century. **However, the gap between men and women among Oscar winners and nominees remains extremely significant**.
 
 
 

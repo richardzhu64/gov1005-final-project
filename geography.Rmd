@@ -1,0 +1,196 @@
+---
+title: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(rvest)
+library(janitor)
+library(gender)
+library(broom)
+library(countrycode)
+library(patchwork)
+library(gt)
+```
+
+```{r Data Processing}
+# OSCARS BIFF COMPARED TO OTHERS GRAPHS
+
+reverse_countries <- function(v) {
+  search <- c("UnitedStates"="United States", "UnitedKingdom"="United Kingdom",
+              "WestGermany"="Germany", "CzechRepublic" = "Czech Republic",
+              "HongKong"="Hong Kong", "SouthKorea"="South Korea",
+              "NewZealand"="New Zealand", "SovietUnion"="Russia")
+  str_replace_all(v, search)
+}
+palme_dor <- readRDS("Oscars_Local/palme_dor_year_win.rds")
+oscars <- readRDS("Oscars_Local/biff_titles.rds")
+baftas <- readRDS("Oscars_Local/bafta_year_win.rds")
+
+unnest_palme_country <- suppressWarnings(palme_dor %>%
+  unnest(country) %>%
+  mutate(country = country %>% reverse_countries()) %>%
+  mutate(continent = map(country, ~ countrycode(sourcevar = ., 
+                                                origin = "country.name",
+                                                destination = "continent"))) %>%
+  mutate(continent = as.character(continent)))
+
+
+unnest_baftas_country <- suppressWarnings(baftas %>%
+  unnest(country) %>%
+  mutate(country = country %>% reverse_countries()) %>%
+  mutate(continent = map(country, ~ countrycode(sourcevar = ., 
+                                              origin = "country.name",
+                                              destination = "continent"))) %>%
+  mutate(continent = as.character(continent)) %>%
+  distinct(film, year, continent, .keep_all = TRUE))
+
+unnest_oscars_country <- suppressWarnings(oscars %>%
+  mutate(continent = map(country, ~ countrycode(sourcevar = ., 
+                                                origin = "country.name",
+                                                destination = "continent"))) %>%
+  mutate(continent = as.character(continent)) %>%
+  mutate(continent = ifelse(is.na(continent), "Europe", continent)))
+  
+
+oscars_continent <- unnest_oscars_country %>%
+distinct(film, year, continent, .keep_all = TRUE)
+baftas_continent <- unnest_baftas_country %>%
+  distinct(film, year, continent, .keep_all = TRUE)
+palme_continent <- unnest_palme_country %>%
+  distinct(film, year, continent, .keep_all = TRUE)
+
+oscars_continent_data <- tibble(yr = 1960:2019) %>%
+  mutate(country_total = map(yr, ~ filter(oscars_continent, year <= .) %>%
+                               group_by(continent) %>% tally())) %>%
+  unnest(country_total) %>%
+  group_by(yr) %>%
+  mutate(frequency = 100 * n / sum(n)) %>%
+  filter(!is.na(continent))
+
+bafta_continent_data <- tibble(yr = 1983:2020) %>%
+  mutate(country_total = map(yr, ~ filter(baftas_continent, year <= .) %>%
+                               group_by(continent) %>% tally())) %>%
+  unnest(country_total) %>%
+  group_by(yr) %>%
+  mutate(frequency = 100 * n / sum(n)) %>%
+  filter(!is.na(continent))
+
+palme_continent_data <- tibble(yr = 1946:2019) %>%
+  mutate(country_total = map(yr, ~ 
+                               filter(palme_continent, year <= .) %>% 
+                               filter(!(country == "United States")) %>%
+                               group_by(continent) %>% tally())) %>%
+  unnest(country_total) %>%
+  group_by(yr) %>%
+  mutate(frequency = 100 * n / sum(n)) %>%
+  filter(!is.na(continent))
+
+
+  
+bafta_continent_graph <- bafta_continent_data %>%
+  ggplot(aes(x = yr, y = frequency, color = continent)) +
+  geom_line() +
+  theme_classic() +
+  labs(title = "BAFTA BFF By Continent Over Time",
+       subtitle = "% of Films Nominated From 1983 to Year",
+       x = "Year",
+       y = "Percent",
+       color = "Continent",
+       source = "BAFTA")
+
+palme_continent_graph <- palme_continent_data %>%
+  arrange(desc(continent)) %>%
+  ggplot(aes(x = yr, y = frequency, color = continent)) +
+  geom_line() +
+  theme_classic() +
+  labs(title ="Palme D'Or By Continent Over Time",
+       subtitle = "% of Palme D'Or Winners From 1946 to Year",
+       x = "Year",
+       y = "Percent",
+       color = "Continent",
+       source = "Cannes Film Festival")
+
+oscars_continent_graph <- oscars_continent_data %>%
+  arrange(desc(continent)) %>%
+  ggplot(aes(x = yr, y = frequency, color = continent)) +
+  geom_line() +
+  theme_classic() +
+  labs(title ="Oscar BIFF By Continent Over Time",
+       subtitle = "% of BIFF Nominees Thru Year",
+       x = "Year",
+       y = "Percent",
+       color = "Continent",
+       source = "AMPAS")
+
+# OSCARS COMPARED TO OTHERS MODELS
+
+bafta_continent_model <- suppressWarnings(baftas_continent %>%
+  mutate(continent = as.factor(continent)) %>%
+  glm(win ~ 0 + continent, data = ., family = "binomial") %>%
+  tidy(conf.int = TRUE) %>%
+  select(term, estimate, conf.low, conf.high) %>%
+  mutate(estimate = plogis(estimate) %>% round(3),
+         conf.low = plogis(conf.low) %>% round(3),
+         conf.high = plogis(conf.high) %>% round(3)))
+
+oscars_continent_model <- suppressWarnings(oscars_continent %>%
+  glm(win ~ 0 + continent, data = ., family = "binomial") %>%
+  tidy(conf.int = TRUE) %>%
+  select(term, estimate, conf.low, conf.high) %>%
+  mutate(estimate = plogis(estimate) %>% round(3),
+         conf.low = plogis(conf.low) %>% round(3),
+         conf.high = plogis(conf.high) %>% round(3)))
+```
+## Geography
+Here, I investigate the relationship between continent and various film awards\' global film awards over time. I compare the Oscars\' Best International Feature Film, the BAFTA\'s Best Foreign Film, and the Cannes Film Festival\'s Palme D\'Or.
+
+## Model
+The graphs below demonstrate the lack of geographic diversity of these awards over time. Predictably, European films dominate the film awards over time, but in recent years films from Asia and the Americas have increased their presence in these awards. One thing to note is that the Palme D\'Or can also be awarded to US films - to equalize the playing field and look only at non-US films, I filtered out all American Palme D\'Or winners for the graph below.
+
+```{r Graphs}
+(oscars_continent_graph | bafta_continent_graph) / palme_continent_graph
+```
+
+To look at the significance of continents on winning over time more quantitatively, I created a logistic regression model with winning as the independent variable and continent as the dependent variable for the Oscars and BAFTAs. The Cannes Film Festival doesn\'t have official nominations, so I decided to look only at the Oscars and BAFTAs.
+
+### Results and Discussion
+```{r Model Display}
+joined <- oscars_continent_model %>%
+  full_join(bafta_continent_model, by="term") %>%
+  mutate(ci.x = paste("(",conf.low.x,", ",conf.high.x,")", sep = "")) %>%
+  mutate(ci.y = paste("(",conf.low.y,", ",conf.high.y,")", sep = "")) %>%
+  select(-conf.low.x, -conf.high.x, -conf.low.y, -conf.high.y)
+table <- joined %>%
+  gt() %>%
+  tab_header(title = "Models Demonstrating Relationship between Geography and Film Awards Over Time",
+             subtitle = "Oscars Best International Feature Film and BAFTAs Best Foreign Film ") %>%
+  tab_spanner(
+    label = "Oscars BIFF",
+    columns = vars(estimate.x, ci.x)
+  ) %>%
+  tab_spanner(
+    label = "BAFTAs BFF",
+    columns = vars(estimate.y, ci.y)
+  ) %>%
+  cols_label(
+    term = "Variable",
+    estimate.x = "Estimate",
+    ci.x = "95% CI",
+    estimate.y = "Estimate",
+    ci.y = "95% CI",
+    ) %>%
+  cols_align(
+    align="center"
+  ) %>%
+  fmt_passthrough(
+    columns = vars(term, estimate.x, ci.x, estimate.y, ci.y)
+  )
+table
+```
+The table above has the logistic regression coefficients normalized using the `plogis()` function. As can be seen, the coefficient for Europe are relatively similar - European films are estimated to have about a 22% chance of winning the Oscars\' BIFF and 21% chance of winning the BAFTA\'s BFF. Starkly different is the chances on the other three continents with non-zero coefficients - while African films have an estimated 33% chance of winning Oscars\' BIFF, African films have never won the BAFTA\'s BFF award. However, films from Asia and the Americas seem to have greater fortunes at the BAFTAs compared to the Oscars.
+
+Another way to look at the data is in terms of the difference between continents within each award show. For the BAFTAs, films from Asia, the Americas, and Europe all have relatively similar probabilities - this implies that continent does not have a very large impact on winning the awards. However, the coefficients for the Oscars BIFF are heterogeneous - African and European films are far more associated with winning than Asian and American films. Thus, there may be some credence to Bong Joon Ho\'s assertion that the Oscars are indeed more \"local\" in terms of their bias towards certain geographical regions.
+
